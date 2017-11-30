@@ -1,0 +1,1389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns1="http://sab/" targetNamespace="http://sab/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>Contragent service Revision: 16926.</wsdl:documentation>
+  <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="UTOverTransport">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Lax />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient" />
+          </wsp:Policy>
+        </sp:SignedSupportingTokens>
+        <sec:CarbonSecConfig xmlns:sec="http://www.wso2.org/products/carbon/security">
+          <sec:Authorization>
+            <sec:property name="org.wso2.carbon.security.allowedroles">Contragent</sec:property>
+          </sec:Authorization>
+        </sec:CarbonSecConfig>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xs:schema xmlns:ns="http://sab/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://sab/">
+      <xs:element name="getContactByTaxId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:long" />
+            <xs:element minOccurs="0" name="contactType" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getContactByTaxIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getContactByTaxIdItem" nillable="true" type="ns:getContactByTaxIdItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getContactByTaxIdResponse" type="ns:getContactByTaxIdResponse" />
+      <xs:complexType name="getContactByTaxIdItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="contactType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="phone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="postalCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="regionName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="districtName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="settlementName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="street" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="house" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="building" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="appartment" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="deliveryAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="productCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orderDate" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="searchContragent2">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="docSr" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="docNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contragentCategory" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="searchContragent2Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="contragent" nillable="true" type="ns:contragent" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="searchContragent2Response" type="ns:searchContragent2Response" />
+      <xs:complexType name="contragent">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="lastNameUkr" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="firstNameUkr" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="middleNameUkr" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="docSr" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="docNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="docIssueDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="docIssPlace" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateOfBirth" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="placeOfBirth" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="residence" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="taxAdmCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrCountry" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrPostcode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrCity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrRegionRcuCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrRegion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrDistrict" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrStreet" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrHouseNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrFlat" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrBuildNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrCountryJur" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrPostcodeJur" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrCityJur" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrRegionJurRcuCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrRegionJur" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrDistrictJur" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrStreetJur" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrHouseNoJur" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrFlatJur" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrBuildNoJur" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrCountryBus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrPostcodeBus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrCityBus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrRegionBus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrDistrictBus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrStreetBus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrHouseNoBus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrFlatBus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addrBuildNoBus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contInf1Home" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contInf2Cellur" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contInf3Work" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contInf4Fax" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contInf5Email" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contInf6Regaddr" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contInf7Staffdw" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contInf8Contper" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contPersName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contPersType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="k060" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="k070" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="nrTaxId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="taxRegDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="cardProduct" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="identification" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="status" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="statusText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="modifiedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isVIP" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="isAClub" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="finBlock" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="K050" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="nameUkr" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="shortNameUkr" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contInf9URL" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="accountOfficer" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="sector" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="target" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="k110" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="creditRating" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addressJur" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="riskCategory" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="nameEng" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="bankRegDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="toboId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="staRegAgency" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="addSubType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="industry" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="k013" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="taxCategory" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="stateRegDocSrNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="workTypesCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="workTypesText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="workTypesTaxReg" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="positionTypesCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="positionTypesText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="sectorClassificationCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="sectorClassificationText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="incomeSourcesCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="incomeSourcesText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="incomeLevelsCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="propertyTypesCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="bankProductsCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="workPlace" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="accountsInOtherBanks" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isPublicPerson" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="controller" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="activityTypes" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="nationality" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="gender" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isCardContragent" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getFinnClass">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getContragentByIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="contragent" nillable="true" type="ns:contragent" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getContragentByIdResponse" type="ns:getContragentByIdResponse" />
+      <xs:complexType name="getContragentByIdItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="finnClass" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getContragentByTaxId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getContragentByTaxIdResponce">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="contragent" nillable="true" type="ns:contragent" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getContragentByTaxIdResponce" type="ns:getContragentByTaxIdResponce" />
+      <xs:element name="registerCardDeal">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="IsCardContragent" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="registerCardDealResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="registerCardDealItem" nillable="true" type="ns:registerCardDealItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="registerCardDealResponse" type="ns:registerCardDealResponse" />
+      <xs:complexType name="registerCardDealItem">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:element name="searchContragentByAccountNo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="accountNo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="searchContragentByAccountNoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="searchContragentByAccountNoItem" nillable="true" type="ns:searchContragentByAccountNoItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="searchContragentByAccountNoResponse" type="ns:searchContragentByAccountNoResponse" />
+      <xs:complexType name="searchContragentByAccountNoItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="sysFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="getContragentByIdResponse" nillable="true" type="ns:getContragentByIdResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="checkContragent">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+            <xs:element name="taxId" type="xs:string" />
+            <xs:element name="lastNameUkr" type="xs:string" />
+            <xs:element name="firstNameUkr" type="xs:string" />
+            <xs:element name="middleNameUkr" type="xs:string" />
+            <xs:element minOccurs="0" name="docSr" nillable="true" type="xs:string" />
+            <xs:element name="docNo" type="xs:string" />
+            <xs:element name="docIssueDate" type="xs:date" />
+            <xs:element name="docIssPlace" type="xs:string" />
+            <xs:element minOccurs="0" name="docEndDate" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="recordNo" nillable="true" type="xs:string" />
+            <xs:element name="dateOfBirth" type="xs:date" />
+            <xs:element name="residence" type="xs:string" />
+            <xs:element name="taxAdmCode" type="xs:string" />
+            <xs:element minOccurs="0" name="gender" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="finBlock" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrKOATUUCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrKOATUUClass" nillable="true" type="xs:string" />
+            <xs:element name="addrCountry" type="xs:string" />
+            <xs:element minOccurs="0" name="addrPostCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrCityType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrCity" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrRegion" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrRegionName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrDistrict" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrStreet" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrHouseNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrFlat" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrBuildNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrKOATUUCodeJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="AddrKOATUUClassJur" nillable="true" type="xs:string" />
+            <xs:element name="addrCountryJur" type="xs:string" />
+            <xs:element minOccurs="0" name="addrPostcodeJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="AddrCityTypeJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrCityJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrRegionJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrRegionNameJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrDistrictJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrStreetJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrHouseNoJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrFlatJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrBuildNoJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf1Home" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf2Cellur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf3Work" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf4Fax" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf5EMail" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf6RegAddr" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf7StaffDw" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf8ContPer" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contPersType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contPersName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="k013" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="k050" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="k060" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="k070" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="k110" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="nrTaxId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="nrStateRegisterCountry" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="taxRegDate" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="placeOfBirth" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="modifiedBy" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="nationality" nillable="true" type="xs:string" />
+            <xs:element name="docTypeId" type="xs:string" />
+            <xs:element minOccurs="0" name="isCardContragent" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="firstNameEng" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="lastNameEng" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="taxCategory" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="additionalInfo1" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="additionalInfo2" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="toboId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="relManager" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="fatcaQuest" nillable="true" type="xs:int" />
+            <xs:element minOccurs="0" name="fatcaStatus" nillable="true" type="xs:int" />
+            <xs:element name="externalSystem" type="xs:string" />
+            <xs:element minOccurs="0" name="applicationType" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="checkContragentResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="checkContragentItem" nillable="true" type="ns:checkContragentItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="checkContragentResponse" type="ns:checkContragentResponse" />
+      <xs:complexType name="checkContragentItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fieldName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="fieldValue" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="errorText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="errorType" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="searchContragentByDealNo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="searchContragentByDealNoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="searchContragentByDealNoItem" nillable="true" type="ns:searchContragentByDealNoItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="searchContragentByDealNoResponse" type="ns:searchContragentByDealNoResponse" />
+      <xs:complexType name="searchContragentByDealNoItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="sysFrom" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="getContragentByIdResponse" nillable="true" type="ns:getContragentByIdResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getContragentRelations">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="relativeSector" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getContragentRelationsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getContragentRelationsItem" nillable="true" type="ns:getContragentRelationsItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getContragentRelationsResponse" type="ns:getContragentRelationsResponse" />
+      <xs:complexType name="getContragentRelationsItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="сontragentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="sector" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="fullName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="relationCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="relationName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="relativeContragentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="relativeSector" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="relativeTaxId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="relativeFullName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="relationModifiedDate" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getFinMonitorRiskByContragentId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getFinMonitorRiskByContragentIdResponce">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getFinMonitorRiskByContragentIdItem" nillable="true" type="ns:getFinMonitorRiskByContragentIdItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getFinMonitorRiskByContragentIdResponce" type="ns:getFinMonitorRiskByContragentIdResponce" />
+      <xs:complexType name="getFinMonitorRiskByContragentIdItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="riskCategory" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="identifyContragentByDeal">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="searchString" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="identifyContragentByDealResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="identifyContragentByDealItem" nillable="true" type="ns:identifyContragentByDealItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="identifyContragentByDealResponse" type="ns:identifyContragentByDealResponse" />
+      <xs:complexType name="identifyContragentByDealItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="entity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="taxIdMix" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="getContragentByIdResponse" nillable="true" type="ns:getContragentByIdResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getContragentById">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCustomerProfileFull">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getCustomerProfileFullResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="customerProfileFull" nillable="true" type="ns:customerProfileFull" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getCustomerProfileFullResponse" type="ns:getCustomerProfileFullResponse" />
+      <xs:complexType name="customerProfileFull">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="getCustomerProfileByTaxIdResponce" nillable="true" type="ns:getCustomerProfileByTaxIdResponce" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getCustomerProfileByTaxIdResponce">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getCustomerProfileByTaxIdItem" nillable="true" type="ns:getCustomerProfileByTaxIdItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getCustomerProfileByTaxIdResponce" type="ns:getCustomerProfileByTaxIdResponce" />
+      <xs:complexType name="getCustomerProfileByTaxIdItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="familyStatus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="childCount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dependantsCount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="spouseLastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="spouseName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="spouseBirthDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="marriageDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="nameChanged" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="nameChangedDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="formerLastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="formerFirstName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="formerMidName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentPostcode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentRegion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentDistrict" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentSettlement" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentApp" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentStreet" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentHouse" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentRegDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="contragentPhone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="permanentResidentType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="residingDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="appTotalArea" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="purchaseWay" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="habitationType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="permanentResidentTerm" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgRegistrCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPostCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgRegion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgDistrict" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgSettlement" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgStreet" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgaHouse" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgPhoneNum" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgEmployeeCount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="startWorkDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="totalEmplYears" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="education" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="orgScopeActivity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="scopeActivity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="position" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="subordinatesCount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="workType" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantLastName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantMidName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantTaxId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantPassportSr" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantPassportNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantBirthDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="guarantPhone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantMobilePhone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantPostcode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantRegion" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantDistrict" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantSettlement" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantStreet" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantHouse" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantApp" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="guarantRegDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="confirmedProfits" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="basicProfits" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="extLoanCount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="extLoanCreditor" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="extLoanStartDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="carCount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="carModel" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="carNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="carYear" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hasCarLoan" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hasMortgageLoan" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hasOtherLoan" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalLoansAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalLoansMonthPayment" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalLoansRemainBalance" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getCustomerProfileByTaxId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="searchContragentUSB">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="docSr" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="docNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contragentCategory" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="searchActive" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="searchContragentUSBResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="contragent" nillable="true" type="ns:contragent" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="searchContragentUSBResponse" type="ns:searchContragentUSBResponse" />
+      <xs:element name="registerContragent">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="lastNameUkr" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="firstNameUkr" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="middleNameUkr" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="docSr" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="docNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="docIssueDate" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="docIssPlace" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="docEndDate" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="recordNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dateOfBirth" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="residence" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="nrStateRegisterCountry" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="taxAdmCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrCountry" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrPostcode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrCity" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrRegion" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrRegionName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrDistrict" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrStreet" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrHouseNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrFlat" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrBuildNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrCountryJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrPostcodeJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrCityJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrRegionJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrRegionNameJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrDistrictJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrStreetJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrHouseNoJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrFlatJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrBuildNoJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf1Home" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf2Cellur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf3Work" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf4Fax" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf5Email" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf6Regaddrhf" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf7Staffdwp" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contInf8Contperph" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contPersType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contPersName" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="k060" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="k070" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="nrTaxId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="taxRegDate" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="placeOfBirth" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="cardProduct" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="identification" nillable="true" type="xs:int" />
+            <xs:element minOccurs="0" name="modifiedBy" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="nationality" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="docTypeId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="isCardContragent" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="firstNameEng" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="lastNameEng" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="taxCategory" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="workTypesCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="workTypesText" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="workTypesTaxReg" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="stateRegDocSrNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="positionTypesCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="positionTypesText" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sectorClassificationCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sectorClassificationText" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="incomeSourcesCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="incomeSourcesText" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="incomeLevelsCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="propertyTypesCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="bankProductsCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="workPlace" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="accountsInOtherBanks" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="isPublicPerson" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="controller" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="activityTypes" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="additionalInfo1" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="additionalInfo2" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="signDate" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="addrKOATUUCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrKOATUUClass" nillable="true" type="xs:int" />
+            <xs:element minOccurs="0" name="addrCityType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrKOATUUCodeJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="addrKOATUUClassJur" nillable="true" type="xs:int" />
+            <xs:element minOccurs="0" name="addrCityTypeJur" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="gender" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="externalSystem" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="finnClass" nillable="true" type="xs:int" />
+            <xs:element minOccurs="0" name="applicationType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="fatcaQuest" nillable="true" type="xs:int" />
+            <xs:element minOccurs="0" name="fatcaStatus" nillable="true" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="registerContragentResponses">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="registerContragentResponse" nillable="true" type="ns:registerContragentResponse" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="registerContragentResponses" type="ns:registerContragentResponses" />
+      <xs:complexType name="registerContragentResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="residence" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="nationality" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="updateContragentTaxInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="contragentId" type="xs:string" />
+            <xs:element minOccurs="0" name="taxAdmCode" nillable="true" type="xs:string" />
+            <xs:element name="taxCategory" type="xs:int" />
+            <xs:element name="externalSystem" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="updateContragentTaxInfoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="updateContragentTaxInfoItem" nillable="true" type="ns:updateContragentTaxInfoItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="updateContragentTaxInfoResponse" type="ns:updateContragentTaxInfoResponse" />
+      <xs:complexType name="updateContragentTaxInfoItem">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:element name="searchContragent">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="docSr" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="docNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dateOfBirth" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="lastNameUkr" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="searchContragentResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="contragent" nillable="true" type="ns:contragent" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="searchContragentResponse" type="ns:searchContragentResponse" />
+      <xs:element name="checkCodeD5CodeD6">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="residence" type="xs:string" />
+            <xs:element name="k070" type="xs:string" />
+            <xs:element name="k050" type="xs:string" />
+            <xs:element name="k110_1" type="xs:string" />
+            <xs:element minOccurs="0" name="balanceAccount" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="checkCodeD5CodeD6Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="checkCodeD5CodeD6Item" nillable="true" type="ns:checkCodeD5CodeD6Item" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="checkCodeD5CodeD6Response" type="ns:checkCodeD5CodeD6Response" />
+      <xs:complexType name="checkCodeD5CodeD6Item">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:element name="checkResidenceChange">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="checkResidenceChangeResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="checkResidenceChangeItem" nillable="true" type="ns:checkResidenceChangeItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="checkResidenceChangeResponse" type="ns:checkResidenceChangeResponse" />
+      <xs:complexType name="checkResidenceChangeItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="checkCode" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="searchContragentRequest">
+    <wsdl:part name="parameters" element="ns1:searchContragent" />
+  </wsdl:message>
+  <wsdl:message name="searchContragentResponse">
+    <wsdl:part name="parameters" element="ns1:searchContragentResponse" />
+  </wsdl:message>
+  <wsdl:message name="getContragentByTaxIdRequest">
+    <wsdl:part name="parameters" element="ns1:getContragentByTaxId" />
+  </wsdl:message>
+  <wsdl:message name="getContragentByTaxIdResponse">
+    <wsdl:part name="parameters" element="ns1:getContragentByTaxIdResponce" />
+  </wsdl:message>
+  <wsdl:message name="searchContragentUSBRequest">
+    <wsdl:part name="parameters" element="ns1:searchContragentUSB" />
+  </wsdl:message>
+  <wsdl:message name="searchContragentUSBResponse">
+    <wsdl:part name="parameters" element="ns1:searchContragentUSBResponse" />
+  </wsdl:message>
+  <wsdl:message name="getFinMonitorRiskByContragentIdRequest">
+    <wsdl:part name="parameters" element="ns1:getFinMonitorRiskByContragentId" />
+  </wsdl:message>
+  <wsdl:message name="getFinMonitorRiskByContragentIdResponse">
+    <wsdl:part name="parameters" element="ns1:getFinMonitorRiskByContragentIdResponce" />
+  </wsdl:message>
+  <wsdl:message name="checkContragentRequest">
+    <wsdl:part name="parameters" element="ns1:checkContragent" />
+  </wsdl:message>
+  <wsdl:message name="checkContragentResponse">
+    <wsdl:part name="parameters" element="ns1:checkContragentResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkCodeD5CodeD6Request">
+    <wsdl:part name="parameters" element="ns1:checkCodeD5CodeD6" />
+  </wsdl:message>
+  <wsdl:message name="checkCodeD5CodeD6Response">
+    <wsdl:part name="parameters" element="ns1:checkCodeD5CodeD6Response" />
+  </wsdl:message>
+  <wsdl:message name="getContactByTaxIdRequest">
+    <wsdl:part name="parameters" element="ns1:getContactByTaxId" />
+  </wsdl:message>
+  <wsdl:message name="getContactByTaxIdResponse">
+    <wsdl:part name="parameters" element="ns1:getContactByTaxIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="getContragentRelationsRequest">
+    <wsdl:part name="parameters" element="ns1:getContragentRelations" />
+  </wsdl:message>
+  <wsdl:message name="getContragentRelationsResponse">
+    <wsdl:part name="parameters" element="ns1:getContragentRelationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="identifyContragentByDealRequest">
+    <wsdl:part name="parameters" element="ns1:identifyContragentByDeal" />
+  </wsdl:message>
+  <wsdl:message name="identifyContragentByDealResponse">
+    <wsdl:part name="parameters" element="ns1:identifyContragentByDealResponse" />
+  </wsdl:message>
+  <wsdl:message name="searchContragent2Request">
+    <wsdl:part name="parameters" element="ns1:searchContragent2" />
+  </wsdl:message>
+  <wsdl:message name="searchContragent2Response">
+    <wsdl:part name="parameters" element="ns1:searchContragent2Response" />
+  </wsdl:message>
+  <wsdl:message name="getContragentByIdRequest">
+    <wsdl:part name="parameters" element="ns1:getContragentById" />
+  </wsdl:message>
+  <wsdl:message name="getContragentByIdResponse">
+    <wsdl:part name="parameters" element="ns1:getContragentByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCustomerProfileFullRequest">
+    <wsdl:part name="parameters" element="ns1:getCustomerProfileFull" />
+  </wsdl:message>
+  <wsdl:message name="getCustomerProfileFullResponse">
+    <wsdl:part name="parameters" element="ns1:getCustomerProfileFullResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCustomerProfileByTaxIdRequest">
+    <wsdl:part name="parameters" element="ns1:getCustomerProfileByTaxId" />
+  </wsdl:message>
+  <wsdl:message name="getCustomerProfileByTaxIdResponse">
+    <wsdl:part name="parameters" element="ns1:getCustomerProfileByTaxIdResponce" />
+  </wsdl:message>
+  <wsdl:message name="registerCardDealRequest">
+    <wsdl:part name="parameters" element="ns1:registerCardDeal" />
+  </wsdl:message>
+  <wsdl:message name="registerCardDealResponse">
+    <wsdl:part name="parameters" element="ns1:registerCardDealResponse" />
+  </wsdl:message>
+  <wsdl:message name="registerContragentRequest">
+    <wsdl:part name="parameters" element="ns1:registerContragent" />
+  </wsdl:message>
+  <wsdl:message name="registerContragentResponse">
+    <wsdl:part name="parameters" element="ns1:registerContragentResponses" />
+  </wsdl:message>
+  <wsdl:message name="updateContragentTaxInfoRequest">
+    <wsdl:part name="parameters" element="ns1:updateContragentTaxInfo" />
+  </wsdl:message>
+  <wsdl:message name="updateContragentTaxInfoResponse">
+    <wsdl:part name="parameters" element="ns1:updateContragentTaxInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="searchContragentByAccountNoRequest">
+    <wsdl:part name="parameters" element="ns1:searchContragentByAccountNo" />
+  </wsdl:message>
+  <wsdl:message name="searchContragentByAccountNoResponse">
+    <wsdl:part name="parameters" element="ns1:searchContragentByAccountNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="searchContragentByDealNoRequest">
+    <wsdl:part name="parameters" element="ns1:searchContragentByDealNo" />
+  </wsdl:message>
+  <wsdl:message name="searchContragentByDealNoResponse">
+    <wsdl:part name="parameters" element="ns1:searchContragentByDealNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkResidenceChangeRequest">
+    <wsdl:part name="parameters" element="ns1:checkResidenceChange" />
+  </wsdl:message>
+  <wsdl:message name="checkResidenceChangeResponse">
+    <wsdl:part name="parameters" element="ns1:checkResidenceChangeResponse" />
+  </wsdl:message>
+  <wsdl:message name="getFinnClassRequest">
+    <wsdl:part name="parameters" element="ns1:getFinnClass" />
+  </wsdl:message>
+  <wsdl:message name="getFinnClassResponse">
+    <wsdl:part name="parameters" element="ns1:getContragentByIdResponse" />
+  </wsdl:message>
+  <wsdl:portType xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" wsp:PolicyURIs="#UTOverTransport" name="ContragentPortType">
+    <wsdl:operation name="searchContragent">
+      <wsdl:documentation>Данный метод используется для поиска контрагента-физлица и может вернуть несколько записей. Если параметры не заданы то возвращается пустой список.
+    Поиск ведется по всем заданным параметрам, но обязательными являются либо ИНН либо Номер документа.</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:searchContragent" message="ns1:searchContragentRequest" />
+      <wsdl:output wsaw:Action="urn:searchContragentResponse" message="ns1:searchContragentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getContragentByTaxId">
+      <wsdl:documentation>Возвращает контрагента-физлицо по ИНН. Если параметры не заданы то возвращается пустой список. Не возвращает контрагентов с незаданным ИНН (000000000).</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getContragentByTaxId" message="ns1:getContragentByTaxIdRequest" />
+      <wsdl:output wsaw:Action="urn:getContragentByTaxIdResponse" message="ns1:getContragentByTaxIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchContragentUSB">
+      <wsdl:documentation>Поиск клиента Укрсоцбанка по уникальному коду / ИНН/ЕГРПОУ / серии, номеру документа / наименованию. Возможность поиска по частичному совпадению в полном и кратком наименовании.</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:searchContragentUSB" message="ns1:searchContragentUSBRequest" />
+      <wsdl:output wsaw:Action="urn:searchContragentUSBResponse" message="ns1:searchContragentUSBResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getFinMonitorRiskByContragentId">
+      <wsdl:documentation>Сервис возвращает категорию риска из Б2
+    </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getFinMonitorRiskByContragentId" message="ns1:getFinMonitorRiskByContragentIdRequest" />
+      <wsdl:output wsaw:Action="urn:getFinMonitorRiskByContragentIdResponse" message="ns1:getFinMonitorRiskByContragentIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkContragent">
+      <wsdl:documentation>Проверка корректности заполнения данных контрагента</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:checkContragent" message="ns1:checkContragentRequest" />
+      <wsdl:output wsaw:Action="urn:checkContragentResponse" message="ns1:checkContragentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkCodeD5CodeD6">
+      <wsdl:input wsaw:Action="urn:checkCodeD5CodeD6" message="ns1:checkCodeD5CodeD6Request" />
+      <wsdl:output wsaw:Action="urn:checkCodeD5CodeD6Response" message="ns1:checkCodeD5CodeD6Response" />
+    </wsdl:operation>
+    <wsdl:operation name="getContactByTaxId">
+      <wsdl:documentation>Вызов DS функции для получения контактной информации по клиенту по ИНН и необязательному параметру типу контактной информации из CSence.
+	</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getContactByTaxId" message="ns1:getContactByTaxIdRequest" />
+      <wsdl:output wsaw:Action="urn:getContactByTaxIdResponse" message="ns1:getContactByTaxIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getContragentRelations">
+      <wsdl:documentation>WS для получения информации по связям контрагента
+    </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getContragentRelations" message="ns1:getContragentRelationsRequest" />
+      <wsdl:output wsaw:Action="urn:getContragentRelationsResponse" message="ns1:getContragentRelationsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="identifyContragentByDeal">
+      <wsdl:documentation>Унифицированный интервейс для поиска контрагента по: номеру договора или счета кредитного продукта (2909), номеру договора или счета депозитного продукта (2630, 2620), номеру договора или счета текущего счета(2620), номеру договора, счета или номера карточного продукт(2625). Должна вернуться одна запись контрагента если контрагент найден. Ноль записей если контрагент не найден. Если получено более одной записи - это ошибка для анализа/отображения на клиенте.
+    </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:identifyContragentByDeal" message="ns1:identifyContragentByDealRequest" />
+      <wsdl:output wsaw:Action="urn:identifyContragentByDealResponse" message="ns1:identifyContragentByDealResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchContragent2">
+      <wsdl:documentation>Поиск клиента по уникальному коду / ИНН/ЕГРПОУ / серии, номеру документа / наименованию. Возможность поиска по частичному совпадению в полном и кратком наименовании</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:searchContragent2" message="ns1:searchContragent2Request" />
+      <wsdl:output wsaw:Action="urn:searchContragent2Response" message="ns1:searchContragent2Response" />
+    </wsdl:operation>
+    <wsdl:operation name="getContragentById">
+      <wsdl:documentation>Получение данных по контрагенту по его глобальному идентификатору</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getContragentById" message="ns1:getContragentByIdRequest" />
+      <wsdl:output wsaw:Action="urn:getContragentByIdResponse" message="ns1:getContragentByIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerProfileFull">
+      <wsdl:documentation>Данный метод сравнительно долгий. Он ищет id контрагента в системе Б2, затем вызывает получение информации в системе Т24 по ID, и во фронт системах по TaxID. </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getCustomerProfileFull" message="ns1:getCustomerProfileFullRequest" />
+      <wsdl:output wsaw:Action="urn:getCustomerProfileFullResponse" message="ns1:getCustomerProfileFullResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerProfileByTaxId">
+      <wsdl:documentation>Метод возвращает расширенные данные по клиенту из его заявок (кредитных).
+        На данный момент данные подтягиваются только из системы слолп.
+    </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getCustomerProfileByTaxId" message="ns1:getCustomerProfileByTaxIdRequest" />
+      <wsdl:output wsaw:Action="urn:getCustomerProfileByTaxIdResponse" message="ns1:getCustomerProfileByTaxIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="registerCardDeal">
+      <wsdl:documentation>Установка/снятие признака «Карточный клиент»</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:registerCardDeal" message="ns1:registerCardDealRequest" />
+      <wsdl:output wsaw:Action="urn:registerCardDealResponse" message="ns1:registerCardDealResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="registerContragent">
+      <wsdl:documentation>Модифицирует контрагента если он существует в бек системе,
+    либо создает нового если его нет. После передает идентификационный номер контрагента в систему CSense.</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:registerContragent" message="ns1:registerContragentRequest" />
+      <wsdl:output wsaw:Action="urn:registerContragentResponse" message="ns1:registerContragentResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="updateContragentTaxInfo">
+      <wsdl:documentation>Обновления &amp;quot;Категория ГНА контрагента&amp;quot; и &amp;quot;Код налоговой контрагента&amp;quot;</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:updateContragentTaxInfo" message="ns1:updateContragentTaxInfoRequest" />
+      <wsdl:output wsaw:Action="urn:updateContragentTaxInfoResponse" message="ns1:updateContragentTaxInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchContragentByAccountNo">
+      <wsdl:documentation>Sends request to B2 and IsCard to find contragentId by accountNo, then requests T24 for contragent data.
+                USE: MAB.
+    </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:searchContragentByAccountNo" message="ns1:searchContragentByAccountNoRequest" />
+      <wsdl:output wsaw:Action="urn:searchContragentByAccountNoResponse" message="ns1:searchContragentByAccountNoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="searchContragentByDealNo">
+      <wsdl:documentation>Sends request to B2 and IsCard to find contragentId by dealNo, then requests T24 for contragent data.
+                USE: MAB.
+    </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:searchContragentByDealNo" message="ns1:searchContragentByDealNoRequest" />
+      <wsdl:output wsaw:Action="urn:searchContragentByDealNoResponse" message="ns1:searchContragentByDealNoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkResidenceChange">
+      <wsdl:documentation>Проверка возможности смены резидентности</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:checkResidenceChange" message="ns1:checkResidenceChangeRequest" />
+      <wsdl:output wsaw:Action="urn:checkResidenceChangeResponse" message="ns1:checkResidenceChangeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getFinnClass">
+      <wsdl:documentation>Get Contragent's finnClass</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getFinnClass" message="ns1:getFinnClassRequest" />
+      <wsdl:output wsaw:Action="urn:getFinnClassResponse" message="ns1:getFinnClassResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ContragentSoap11Binding" type="ns1:ContragentPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="searchContragent">
+      <soap:operation soapAction="urn:searchContragent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContragentByTaxId">
+      <soap:operation soapAction="urn:getContragentByTaxId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchContragentUSB">
+      <soap:operation soapAction="urn:searchContragentUSB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFinMonitorRiskByContragentId">
+      <soap:operation soapAction="urn:getFinMonitorRiskByContragentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkContragent">
+      <soap:operation soapAction="urn:checkContragent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkCodeD5CodeD6">
+      <soap:operation soapAction="urn:checkCodeD5CodeD6" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContactByTaxId">
+      <soap:operation soapAction="urn:getContactByTaxId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContragentRelations">
+      <soap:operation soapAction="urn:getContragentRelations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="identifyContragentByDeal">
+      <soap:operation soapAction="urn:identifyContragentByDeal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchContragent2">
+      <soap:operation soapAction="urn:searchContragent2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContragentById">
+      <soap:operation soapAction="urn:getContragentById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerProfileFull">
+      <soap:operation soapAction="urn:getCustomerProfileFull" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerProfileByTaxId">
+      <soap:operation soapAction="urn:getCustomerProfileByTaxId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registerCardDeal">
+      <soap:operation soapAction="urn:registerCardDeal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registerContragent">
+      <soap:operation soapAction="urn:registerContragent" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateContragentTaxInfo">
+      <soap:operation soapAction="urn:updateContragentTaxInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchContragentByAccountNo">
+      <soap:operation soapAction="urn:searchContragentByAccountNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchContragentByDealNo">
+      <soap:operation soapAction="urn:searchContragentByDealNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkResidenceChange">
+      <soap:operation soapAction="urn:checkResidenceChange" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFinnClass">
+      <soap:operation soapAction="urn:getFinnClass" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ContragentHttpBinding" type="ns1:ContragentPortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="searchContragent">
+      <http:operation location="searchContragent" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContragentByTaxId">
+      <http:operation location="getContragentByTaxId" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchContragentUSB">
+      <http:operation location="searchContragentUSB" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFinMonitorRiskByContragentId">
+      <http:operation location="getFinMonitorRiskByContragentId" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkContragent">
+      <http:operation location="checkContragent" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkCodeD5CodeD6">
+      <http:operation location="checkCodeD5CodeD6" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContactByTaxId">
+      <http:operation location="getContactByTaxId" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContragentRelations">
+      <http:operation location="getContragentRelations" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="identifyContragentByDeal">
+      <http:operation location="identifyContragentByDeal" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchContragent2">
+      <http:operation location="searchContragent2" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getContragentById">
+      <http:operation location="getContragentById" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerProfileFull">
+      <http:operation location="getCustomerProfileFull" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerProfileByTaxId">
+      <http:operation location="getCustomerProfileByTaxId" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registerCardDeal">
+      <http:operation location="registerCardDeal" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registerContragent">
+      <http:operation location="registerContragent" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateContragentTaxInfo">
+      <http:operation location="updateContragentTaxInfo" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchContragentByAccountNo">
+      <http:operation location="searchContragentByAccountNo" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchContragentByDealNo">
+      <http:operation location="searchContragentByDealNo" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkResidenceChange">
+      <http:operation location="checkResidenceChange" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getFinnClass">
+      <http:operation location="getFinnClass" />
+      <wsdl:input>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="parameters" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Contragent">
+    <wsdl:port name="ContragentHttpsSoap11Endpoint" binding="ns1:ContragentSoap11Binding">
+      <soap:address location="https://kwsesbapp10.alfa.bank.int:8243/services/Contragent.ContragentHttpsSoap11Endpoint" />
+    </wsdl:port>
+    <wsdl:port name="ContragentHttpsEndpoint" binding="ns1:ContragentHttpBinding">
+      <http:address location="https://kwsesbapp10.alfa.bank.int:8243/services/Contragent.ContragentHttpsEndpoint" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

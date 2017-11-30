@@ -1,0 +1,1165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:ns1="http://sab/" targetNamespace="http://sab/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation>LoanDeal service $Rev: 14940 $</wsdl:documentation>
+  <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" wsu:Id="UTOverTransport">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Lax />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <sp:SignedSupportingTokens xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:UsernameToken sp:IncludeToken="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy/IncludeToken/AlwaysToRecipient" />
+          </wsp:Policy>
+        </sp:SignedSupportingTokens>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xs:schema xmlns:ns="http://sab/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://sab/">
+      <xs:element name="getPenaltyRepaidByDealNo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getPenaltyRepaidResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getPenaltyRepaidItem" nillable="true" type="ns:getPenaltyRepaidItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getPenaltyRepaidResponse" type="ns:getPenaltyRepaidResponse" />
+      <xs:complexType name="getPenaltyRepaidItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="valueDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="accountANo" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="penaltyRepaidAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="curriencyCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="curriencyText" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDeal2909Movements">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="showIncome" nillable="true" type="xs:int" />
+            <xs:element minOccurs="0" name="showOutgo" nillable="true" type="xs:int" />
+            <xs:element minOccurs="0" name="itemCount" nillable="true" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getLoanDeal2909MovementsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getLoanDeal2909MovementsItem" nillable="true" type="ns:getLoanDeal2909MovementsItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDeal2909MovementsResponse" type="ns:getLoanDeal2909MovementsResponse" />
+      <xs:complexType name="getLoanDeal2909MovementsItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="documentDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="provedDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="valueDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="paymentAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="currencyCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="paymentPurpose" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentPayerShortName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentRecipientShortName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isIncome" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="isOutgo" nillable="true" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getSubProductInfo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="product" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="subproduct" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getSubProductInfoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="subProduct" nillable="true" type="ns:subProduct" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getSubProductInfoResponse" type="ns:getSubProductInfoResponse" />
+      <xs:complexType name="subProduct">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="product" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="subProduct" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="subProductCurrency" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="subProductMinAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="subProductMaxAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="subProductMinTerm" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="subProductMaxTerm" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="subProductGrantFee" nillable="true" type="xs:double" />
+          <xs:element minOccurs="0" name="subProductMaintFee" nillable="true" type="xs:double" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealsByAccountNo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="accountNo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getLoanDealsByAccountNoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getLoanDealsItem" nillable="true" type="ns:getLoanDealsItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealsByAccountNoResponse" type="ns:getLoanDealsByAccountNoResponse" />
+      <xs:complexType name="getLoanDealsItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dealId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="principalAccount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="currencyId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="currencyCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="agreementDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="valueDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="planCloseDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="maturityDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="dealPeriodInMonths" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="statusId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="statusText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dealAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="dealAmountEq" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="currentAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="currentAmountEq" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="interestRate" nillable="true" type="xs:double" />
+          <xs:element minOccurs="0" name="feeRate" nillable="true" type="xs:double" />
+          <xs:element minOccurs="0" name="feeAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isSoldDeal" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="soldDealBuyerTaxId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isBrokenDeal" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="productCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="productDescription" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="nextPaymentDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="hopeless" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="debtSettlement" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="collectionPhone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="toboCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="toboName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="miss003" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isAClub" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isPurchased" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealTranches">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getLoanDealTranchesResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getLoanDealTranchesItem" nillable="true" type="ns:getLoanDealTranchesItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealTranchesResponse" type="ns:getLoanDealTranchesResponse" />
+      <xs:complexType name="getLoanDealTranchesItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="valueDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="useAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="currencyId" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="currencyCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="currencyText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="paymentPurpose" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="registerCardLoanDeal">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:long" />
+            <xs:element minOccurs="0" name="agreementDate" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="valueDate" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="maturityDate" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="maxAmount" nillable="true" type="xs:long" />
+            <xs:element minOccurs="0" name="interestRate" nillable="true" type="xs:double" />
+            <xs:element minOccurs="0" name="loanCurrencyId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="corrAccountNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="accountNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="codeWord" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="posCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="posAgent" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="subProduct" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="typeOfSchedule" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="registerCardLoanDealResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="registerCardLoanDealItem" nillable="true" type="ns:registerCardLoanDealItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="registerCardLoanDealResponse" type="ns:registerCardLoanDealResponse" />
+      <xs:complexType name="registerCardLoanDealItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanFeeSchedule">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getLoanFeeScheduleResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="loanFeeScheduleItem" nillable="true" type="ns:loanFeeScheduleItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanFeeScheduleResponse" type="ns:getLoanFeeScheduleResponse" />
+      <xs:complexType name="loanFeeScheduleItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="ruleId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ruleText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="currencyCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="calculatedAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="accruedAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="repaidAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="operationSignText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="expRepaymentDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="statusText" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealInfoByDate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealno" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="reportdate" nillable="true" type="xs:date" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getLoanDealInfoByDateResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getLoanDealInfoByDateItem" nillable="true" type="ns:getLoanDealInfoByDateItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealInfoByDateResponse" type="ns:getLoanDealInfoByDateResponse" />
+      <xs:complexType name="getLoanDealInfoByDateItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalPrincipalAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="currentDebtAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="overduePrincipalAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="currentPrincipalByScheduleAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="acc2909Amount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="currencyCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="acc2909LastMoveDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="totalInterestAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="overdueInterestAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="interestByScheduleAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="totalFeeAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="penaltyAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="dealStatus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="reportDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="totalDebtAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="currentPaymentAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="debtWithoutCurrentPaymentAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="accountRestAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="overdueFeeAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="currentFeeByScheduleAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="fullRepaymentInterestAmount" nillable="true" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealsByTaxId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="taxId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="displayMode" nillable="true" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getLoanDealsByTaxIdResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getLoanDealsItem" nillable="true" type="ns:getLoanDealsItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealsByTaxIdResponse" type="ns:getLoanDealsByTaxIdResponse" />
+      <xs:element name="registerLoanDeal">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="dealNo" type="xs:string" />
+            <xs:element name="contragentId" type="xs:long" />
+            <xs:element name="signDate" type="xs:date" />
+            <xs:element name="valueDate" type="xs:date" />
+            <xs:element name="maturityDate" type="xs:date" />
+            <xs:element name="loanAmount" type="xs:long" />
+            <xs:element name="interestRate" type="xs:double" />
+            <xs:element name="currencyCode" type="xs:string" />
+            <xs:element minOccurs="0" name="corrAccountNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="accountNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="cardNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="codeWord" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="posCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="posAgent" nillable="true" type="xs:string" />
+            <xs:element name="subProduct" type="xs:string" />
+            <xs:element name="typeOfSchedule" type="xs:string" />
+            <xs:element minOccurs="0" name="loanType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="grantFeeAmount" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="transAccountNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="pledgePrice" nillable="true" type="xs:long" />
+            <xs:element minOccurs="0" name="postponeAmount" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="postponePeriod" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="additionalInfo1" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="additionalInfo2" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dealerPaymentAmount" nillable="true" type="xs:long" />
+            <xs:element minOccurs="0" name="invoiceNumber" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="invoiceDate" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="principalPaymentType" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="principalPaymentMfoCode" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="principalPaymentTaxId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="principalPaymentAccountNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="principalPaymentPurpose" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="securityList" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="principalLoanPayments" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="otherLoanPayments" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="chargeToCard" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="registerLoanDealResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="registerLoanDealItem" nillable="true" type="ns:registerLoanDealItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="registerLoanDealResponse" type="ns:registerLoanDealResponse" />
+      <xs:complexType name="registerLoanDealItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getPenaltyAccrualByDealNo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getPenaltyAccrualResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getPenaltyAccrualItem" nillable="true" type="ns:getPenaltyAccrualItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getPenaltyAccrualResponse" type="ns:getPenaltyAccrualResponse" />
+      <xs:complexType name="getPenaltyAccrualItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="dateFrom" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="dateTo" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="totalDebt" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="interestAmount" nillable="true" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealInfoByDate2">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealno" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="reportdate" nillable="true" type="xs:date" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLoanDealsByDealNo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getLoanDealsByDealNoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getLoanDealsItem" nillable="true" type="ns:getLoanDealsItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealsByDealNoResponse" type="ns:getLoanDealsByDealNoResponse" />
+      <xs:element name="getSoldDeals">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getSoldDealsResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="soldDeal" nillable="true" type="ns:soldDeal" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getSoldDealsResponse" type="ns:getSoldDealsResponse" />
+      <xs:complexType name="soldDeal">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalActiveAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalPasiveAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="totalDebtAmount" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="currencyCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="agencyName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="agencyPhone" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="soldDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="statusText" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealRepaymentPlan168">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="loanId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="loanAgreement" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getLoanDealRepaymentPlan168Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="loanDealRepaymentPlanItem" nillable="true" type="ns:loanDealRepaymentPlanItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealRepaymentPlan168Response" type="ns:getLoanDealRepaymentPlan168Response" />
+      <xs:complexType name="loanDealRepaymentPlanItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="paymentNum" nillable="true" type="xs:int" />
+          <xs:element minOccurs="0" name="paymentDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="principalAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="interestAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="maintFeeAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="repayedPrincipalAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="repayedInterestAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="repayedFeeAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="restPrincipalAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="paymentStatus" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="paymentStatusText" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="tillFeeAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="grantFeeAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="otherFeeAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="thirdInsurAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="thirdNotariusAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="thirdOtherAmount" nillable="true" type="xs:long" />
+          <xs:element minOccurs="0" name="realInterestRate" nillable="true" type="xs:double" />
+          <xs:element minOccurs="0" name="systemFrom" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getValueDates">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="reportDate" nillable="true" type="xs:date" />
+            <xs:element minOccurs="0" name="subProduct" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dealPeriod" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="taxCategory" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="principalPaymentType" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getValueDateResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getValueDateItem" nillable="true" type="ns:getValueDateItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getValueDateResponse" type="ns:getValueDateResponse" />
+      <xs:complexType name="getValueDateItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="startValueDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="endValueDate" nillable="true" type="xs:date" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getInterestRateSchedule">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="dealId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getInterestRateScheduleResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getInterestRateScheduleItem" nillable="true" type="ns:getInterestRateScheduleItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getInterestRateScheduleResponse" type="ns:getInterestRateScheduleResponse" />
+      <xs:complexType name="getInterestRateScheduleItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="fromDate" nillable="true" type="xs:date" />
+          <xs:element minOccurs="0" name="rate" nillable="true" type="xs:double" />
+          <xs:element minOccurs="0" name="base" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="baseRate" nillable="true" type="xs:double" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getPosDetailsByDealNo">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getPosDetailsByDealNoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="getPosDetailsByDealNoItem" nillable="true" type="ns:getPosDetailsByDealNoItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getPosDetailsByDealNoResponse" type="ns:getPosDetailsByDealNoResponse" />
+      <xs:complexType name="getPosDetailsByDealNoItem">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="dealNo" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="shopId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="shopShortName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="shopAddress" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="posAgentFullName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="posAgentCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchandiseGroup" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="merchandiseName" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealsByContragentId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contragentId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getLoanDealRepaymentPlan">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="loanId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="loanAgreement" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="getLoanDealRepaymentPlanResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="loanDealRepaymentPlanItem" nillable="true" type="ns:loanDealRepaymentPlanItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getLoanDealRepaymentPlanResponse" type="ns:getLoanDealRepaymentPlanResponse" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getPenaltyRepaidByDealNoRequest">
+    <wsdl:part name="parameters" element="ns1:getPenaltyRepaidByDealNo" />
+  </wsdl:message>
+  <wsdl:message name="getPenaltyRepaidByDealNoResponse">
+    <wsdl:part name="parameters" element="ns1:getPenaltyRepaidResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDeal2909MovementsRequest">
+    <wsdl:part name="parameters" element="ns1:getLoanDeal2909Movements" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDeal2909MovementsResponse">
+    <wsdl:part name="parameters" element="ns1:getLoanDeal2909MovementsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSubProductInfoRequest">
+    <wsdl:part name="parameters" element="ns1:getSubProductInfo" />
+  </wsdl:message>
+  <wsdl:message name="getSubProductInfoResponse">
+    <wsdl:part name="parameters" element="ns1:getSubProductInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealsByAccountNoRequest">
+    <wsdl:part name="parameters" element="ns1:getLoanDealsByAccountNo" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealsByAccountNoResponse">
+    <wsdl:part name="parameters" element="ns1:getLoanDealsByAccountNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealTranchesRequest">
+    <wsdl:part name="parameters" element="ns1:getLoanDealTranches" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealTranchesResponse">
+    <wsdl:part name="parameters" element="ns1:getLoanDealTranchesResponse" />
+  </wsdl:message>
+  <wsdl:message name="registerCardLoanDealRequest">
+    <wsdl:part name="parameters" element="ns1:registerCardLoanDeal" />
+  </wsdl:message>
+  <wsdl:message name="registerCardLoanDealResponse">
+    <wsdl:part name="parameters" element="ns1:registerCardLoanDealResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoanFeeScheduleRequest">
+    <wsdl:part name="parameters" element="ns1:getLoanFeeSchedule" />
+  </wsdl:message>
+  <wsdl:message name="getLoanFeeScheduleResponse">
+    <wsdl:part name="parameters" element="ns1:getLoanFeeScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealInfoByDateRequest">
+    <wsdl:part name="parameters" element="ns1:getLoanDealInfoByDate" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealInfoByDateResponse">
+    <wsdl:part name="parameters" element="ns1:getLoanDealInfoByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealsByTaxIdRequest">
+    <wsdl:part name="parameters" element="ns1:getLoanDealsByTaxId" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealsByTaxIdResponse">
+    <wsdl:part name="parameters" element="ns1:getLoanDealsByTaxIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="registerLoanDealRequest">
+    <wsdl:part name="parameters" element="ns1:registerLoanDeal" />
+  </wsdl:message>
+  <wsdl:message name="registerLoanDealResponse">
+    <wsdl:part name="parameters" element="ns1:registerLoanDealResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPenaltyAccrualByDealNoRequest">
+    <wsdl:part name="parameters" element="ns1:getPenaltyAccrualByDealNo" />
+  </wsdl:message>
+  <wsdl:message name="getPenaltyAccrualByDealNoResponse">
+    <wsdl:part name="parameters" element="ns1:getPenaltyAccrualResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealInfoByDate2Request">
+    <wsdl:part name="parameters" element="ns1:getLoanDealInfoByDate2" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealInfoByDate2Response">
+    <wsdl:part name="parameters" element="ns1:getLoanDealInfoByDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealsByDealNoRequest">
+    <wsdl:part name="parameters" element="ns1:getLoanDealsByDealNo" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealsByDealNoResponse">
+    <wsdl:part name="parameters" element="ns1:getLoanDealsByDealNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getSoldDealsRequest">
+    <wsdl:part name="parameters" element="ns1:getSoldDeals" />
+  </wsdl:message>
+  <wsdl:message name="getSoldDealsResponse">
+    <wsdl:part name="parameters" element="ns1:getSoldDealsResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealRepaymentPlan168Request">
+    <wsdl:part name="parameters" element="ns1:getLoanDealRepaymentPlan168" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealRepaymentPlan168Response">
+    <wsdl:part name="parameters" element="ns1:getLoanDealRepaymentPlan168Response" />
+  </wsdl:message>
+  <wsdl:message name="getValueDatesRequest">
+    <wsdl:part name="parameters" element="ns1:getValueDates" />
+  </wsdl:message>
+  <wsdl:message name="getValueDatesResponse">
+    <wsdl:part name="parameters" element="ns1:getValueDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="getInterestRateScheduleRequest">
+    <wsdl:part name="parameters" element="ns1:getInterestRateSchedule" />
+  </wsdl:message>
+  <wsdl:message name="getInterestRateScheduleResponse">
+    <wsdl:part name="parameters" element="ns1:getInterestRateScheduleResponse" />
+  </wsdl:message>
+  <wsdl:message name="getPosDetailsByDealNoRequest">
+    <wsdl:part name="parameters" element="ns1:getPosDetailsByDealNo" />
+  </wsdl:message>
+  <wsdl:message name="getPosDetailsByDealNoResponse">
+    <wsdl:part name="parameters" element="ns1:getPosDetailsByDealNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealsByContragentIdRequest">
+    <wsdl:part name="parameters" element="ns1:getLoanDealsByContragentId" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealsByContragentIdResponse">
+    <wsdl:part name="parameters" element="ns1:getLoanDealsByDealNoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealRepaymentPlanRequest">
+    <wsdl:part name="parameters" element="ns1:getLoanDealRepaymentPlan" />
+  </wsdl:message>
+  <wsdl:message name="getLoanDealRepaymentPlanResponse">
+    <wsdl:part name="parameters" element="ns1:getLoanDealRepaymentPlanResponse" />
+  </wsdl:message>
+  <wsdl:portType name="LoanDealPortType">
+    <wsdl:operation name="getPenaltyRepaidByDealNo">
+      <wsdl:documentation>Get repaid penalties for loan deal by deal number.
+    </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getPenaltyRepaidByDealNo" message="ns1:getPenaltyRepaidByDealNoRequest" />
+      <wsdl:output wsaw:Action="urn:getPenaltyRepaidByDealNoResponse" message="ns1:getPenaltyRepaidByDealNoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDeal2909Movements">
+      <wsdl:documentation>Получение движений по счету 2909 по номеру сделки.
+	</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getLoanDeal2909Movements" message="ns1:getLoanDeal2909MovementsRequest" />
+      <wsdl:output wsaw:Action="urn:getLoanDeal2909MovementsResponse" message="ns1:getLoanDeal2909MovementsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSubProductInfo">
+      <wsdl:documentation>Get loandealInfo by loanId or DealNumber</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getSubProductInfo" message="ns1:getSubProductInfoRequest" />
+      <wsdl:output wsaw:Action="urn:getSubProductInfoResponse" message="ns1:getSubProductInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByAccountNo">
+      <wsdl:documentation>Get loan deals by Account Number. Now from B2 only with dealtypeId in (355,356)</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getLoanDealsByAccountNo" message="ns1:getLoanDealsByAccountNoRequest" />
+      <wsdl:output wsaw:Action="urn:getLoanDealsByAccountNoResponse" message="ns1:getLoanDealsByAccountNoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealTranches">
+      <wsdl:documentation>Get loan tranches for loan deal by deal number.
+    </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getLoanDealTranches" message="ns1:getLoanDealTranchesRequest" />
+      <wsdl:output wsaw:Action="urn:getLoanDealTranchesResponse" message="ns1:getLoanDealTranchesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="registerCardLoanDeal">
+      <wsdl:documentation>Регистрация кредитной сделки в Бек системе с выдачей денег на карту. Кажется, что этот метод устарел и следует использовать registerLoanDeal</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:registerCardLoanDeal" message="ns1:registerCardLoanDealRequest" />
+      <wsdl:output wsaw:Action="urn:registerCardLoanDealResponse" message="ns1:registerCardLoanDealResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoanFeeSchedule">
+      <wsdl:documentation>Get fee schedule from B2 if loan deal is not in t24_loans table else get fee from T24 
+    			USE: Siebel.
+    </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getLoanFeeSchedule" message="ns1:getLoanFeeScheduleRequest" />
+      <wsdl:output wsaw:Action="urn:getLoanFeeScheduleResponse" message="ns1:getLoanFeeScheduleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealInfoByDate">
+      <wsdl:documentation>Получить статус кредитной сделки на указанную дату</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getLoanDealInfoByDate" message="ns1:getLoanDealInfoByDateRequest" />
+      <wsdl:output wsaw:Action="urn:getLoanDealInfoByDateResponse" message="ns1:getLoanDealInfoByDateResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByTaxId">
+      <wsdl:documentation>Возвращает кредитные сделки физ лица по ИНН. Для сибеля возвращает в том числе и сделки `installment` - для остальных пользователей сделки `installment` не видны. </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getLoanDealsByTaxId" message="ns1:getLoanDealsByTaxIdRequest" />
+      <wsdl:output wsaw:Action="urn:getLoanDealsByTaxIdResponse" message="ns1:getLoanDealsByTaxIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="registerLoanDeal">
+      <wsdl:documentation>Регистрация кредитной сделки в АБС</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:registerLoanDeal" message="ns1:registerLoanDealRequest" />
+      <wsdl:output wsaw:Action="urn:registerLoanDealResponse" message="ns1:registerLoanDealResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPenaltyAccrualByDealNo">
+      <wsdl:documentation>Get accrual penalties for loan deal by deal number.
+    </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getPenaltyAccrualByDealNo" message="ns1:getPenaltyAccrualByDealNoRequest" />
+      <wsdl:output wsaw:Action="urn:getPenaltyAccrualByDealNoResponse" message="ns1:getPenaltyAccrualByDealNoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealInfoByDate2">
+      <wsdl:documentation>DEPRECATED, Use getLoanDealInfoByDate. USE: MAB
+    </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getLoanDealInfoByDate2" message="ns1:getLoanDealInfoByDate2Request" />
+      <wsdl:output wsaw:Action="urn:getLoanDealInfoByDate2Response" message="ns1:getLoanDealInfoByDate2Response" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByDealNo">
+      <wsdl:documentation>Get loan deals Deal number. Now from B2 only with dealtypeId in (355,356)</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getLoanDealsByDealNo" message="ns1:getLoanDealsByDealNoRequest" />
+      <wsdl:output wsaw:Action="urn:getLoanDealsByDealNoResponse" message="ns1:getLoanDealsByDealNoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getSoldDeals">
+      <wsdl:documentation>Проданые сделки</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getSoldDeals" message="ns1:getSoldDealsRequest" />
+      <wsdl:output wsaw:Action="urn:getSoldDealsResponse" message="ns1:getSoldDealsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealRepaymentPlan168">
+      <wsdl:documentation>DEPRECATED. use getLoanDealRepaymentPlan</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getLoanDealRepaymentPlan168" message="ns1:getLoanDealRepaymentPlan168Request" />
+      <wsdl:output wsaw:Action="urn:getLoanDealRepaymentPlan168Response" message="ns1:getLoanDealRepaymentPlan168Response" />
+    </wsdl:operation>
+    <wsdl:operation name="getValueDates">
+      <wsdl:documentation>gets start and maturity dates for a loan deal</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getValueDates" message="ns1:getValueDatesRequest" />
+      <wsdl:output wsaw:Action="urn:getValueDatesResponse" message="ns1:getValueDatesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getInterestRateSchedule">
+      <wsdl:documentation>График изменения % ставки </wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getInterestRateSchedule" message="ns1:getInterestRateScheduleRequest" />
+      <wsdl:output wsaw:Action="urn:getInterestRateScheduleResponse" message="ns1:getInterestRateScheduleResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPosDetailsByDealNo">
+      <wsdl:documentation>Get pos agent and merchandise information of a deal from SLOLP</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getPosDetailsByDealNo" message="ns1:getPosDetailsByDealNoRequest" />
+      <wsdl:output wsaw:Action="urn:getPosDetailsByDealNoResponse" message="ns1:getPosDetailsByDealNoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByContragentId">
+      <wsdl:documentation>Get loan deals by Contragent T24_ID. Now from B2 only with dealtypeId in (355,356)</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getLoanDealsByContragentId" message="ns1:getLoanDealsByContragentIdRequest" />
+      <wsdl:output wsaw:Action="urn:getLoanDealsByContragentIdResponse" message="ns1:getLoanDealsByContragentIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealRepaymentPlan">
+      <wsdl:documentation>Получить график платежей существующей сделки по ее номеру.</wsdl:documentation>
+      <wsdl:input wsaw:Action="urn:getLoanDealRepaymentPlan" message="ns1:getLoanDealRepaymentPlanRequest" />
+      <wsdl:output wsaw:Action="urn:getLoanDealRepaymentPlanResponse" message="ns1:getLoanDealRepaymentPlanResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="LoanDealSoap11Binding" type="ns1:LoanDealPortType">
+    <wsp:PolicyReference xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" URI="#UTOverTransport" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getPenaltyRepaidByDealNo">
+      <soap:operation soapAction="urn:getPenaltyRepaidByDealNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDeal2909Movements">
+      <soap:operation soapAction="urn:getLoanDeal2909Movements" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSubProductInfo">
+      <soap:operation soapAction="urn:getSubProductInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealTranches">
+      <soap:operation soapAction="urn:getLoanDealTranches" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByAccountNo">
+      <soap:operation soapAction="urn:getLoanDealsByAccountNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registerCardLoanDeal">
+      <soap:operation soapAction="urn:registerCardLoanDeal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanFeeSchedule">
+      <soap:operation soapAction="urn:getLoanFeeSchedule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealInfoByDate">
+      <soap:operation soapAction="urn:getLoanDealInfoByDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByTaxId">
+      <soap:operation soapAction="urn:getLoanDealsByTaxId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registerLoanDeal">
+      <soap:operation soapAction="urn:registerLoanDeal" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPenaltyAccrualByDealNo">
+      <soap:operation soapAction="urn:getPenaltyAccrualByDealNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealInfoByDate2">
+      <soap:operation soapAction="urn:getLoanDealInfoByDate2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByDealNo">
+      <soap:operation soapAction="urn:getLoanDealsByDealNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealRepaymentPlan168">
+      <soap:operation soapAction="urn:getLoanDealRepaymentPlan168" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSoldDeals">
+      <soap:operation soapAction="urn:getSoldDeals" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getValueDates">
+      <soap:operation soapAction="urn:getValueDates" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInterestRateSchedule">
+      <soap:operation soapAction="urn:getInterestRateSchedule" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPosDetailsByDealNo">
+      <soap:operation soapAction="urn:getPosDetailsByDealNo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealRepaymentPlan">
+      <soap:operation soapAction="urn:getLoanDealRepaymentPlan" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByContragentId">
+      <soap:operation soapAction="urn:getLoanDealsByContragentId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="LoanDealHttpBinding" type="ns1:LoanDealPortType">
+    <http:binding verb="POST" />
+    <wsdl:operation name="getPenaltyRepaidByDealNo">
+      <http:operation location="getPenaltyRepaidByDealNo" />
+      <wsdl:input>
+        <mime:content part="getPenaltyRepaidByDealNo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPenaltyRepaidByDealNo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDeal2909Movements">
+      <http:operation location="getLoanDeal2909Movements" />
+      <wsdl:input>
+        <mime:content part="getLoanDeal2909Movements" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLoanDeal2909Movements" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSubProductInfo">
+      <http:operation location="getSubProductInfo" />
+      <wsdl:input>
+        <mime:content part="getSubProductInfo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getSubProductInfo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealTranches">
+      <http:operation location="getLoanDealTranches" />
+      <wsdl:input>
+        <mime:content part="getLoanDealTranches" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLoanDealTranches" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByAccountNo">
+      <http:operation location="getLoanDealsByAccountNo" />
+      <wsdl:input>
+        <mime:content part="getLoanDealsByAccountNo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLoanDealsByAccountNo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registerCardLoanDeal">
+      <http:operation location="registerCardLoanDeal" />
+      <wsdl:input>
+        <mime:content part="registerCardLoanDeal" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="registerCardLoanDeal" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanFeeSchedule">
+      <http:operation location="getLoanFeeSchedule" />
+      <wsdl:input>
+        <mime:content part="getLoanFeeSchedule" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLoanFeeSchedule" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealInfoByDate">
+      <http:operation location="getLoanDealInfoByDate" />
+      <wsdl:input>
+        <mime:content part="getLoanDealInfoByDate" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLoanDealInfoByDate" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByTaxId">
+      <http:operation location="getLoanDealsByTaxId" />
+      <wsdl:input>
+        <mime:content part="getLoanDealsByTaxId" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLoanDealsByTaxId" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="registerLoanDeal">
+      <http:operation location="registerLoanDeal" />
+      <wsdl:input>
+        <mime:content part="registerLoanDeal" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="registerLoanDeal" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPenaltyAccrualByDealNo">
+      <http:operation location="getPenaltyAccrualByDealNo" />
+      <wsdl:input>
+        <mime:content part="getPenaltyAccrualByDealNo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPenaltyAccrualByDealNo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealInfoByDate2">
+      <http:operation location="getLoanDealInfoByDate2" />
+      <wsdl:input>
+        <mime:content part="getLoanDealInfoByDate2" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLoanDealInfoByDate2" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByDealNo">
+      <http:operation location="getLoanDealsByDealNo" />
+      <wsdl:input>
+        <mime:content part="getLoanDealsByDealNo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLoanDealsByDealNo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealRepaymentPlan168">
+      <http:operation location="getLoanDealRepaymentPlan168" />
+      <wsdl:input>
+        <mime:content part="getLoanDealRepaymentPlan168" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLoanDealRepaymentPlan168" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSoldDeals">
+      <http:operation location="getSoldDeals" />
+      <wsdl:input>
+        <mime:content part="getSoldDeals" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getSoldDeals" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getValueDates">
+      <http:operation location="getValueDates" />
+      <wsdl:input>
+        <mime:content part="getValueDates" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getValueDates" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInterestRateSchedule">
+      <http:operation location="getInterestRateSchedule" />
+      <wsdl:input>
+        <mime:content part="getInterestRateSchedule" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getInterestRateSchedule" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPosDetailsByDealNo">
+      <http:operation location="getPosDetailsByDealNo" />
+      <wsdl:input>
+        <mime:content part="getPosDetailsByDealNo" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getPosDetailsByDealNo" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealRepaymentPlan">
+      <http:operation location="getLoanDealRepaymentPlan" />
+      <wsdl:input>
+        <mime:content part="getLoanDealRepaymentPlan" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLoanDealRepaymentPlan" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLoanDealsByContragentId">
+      <http:operation location="getLoanDealsByContragentId" />
+      <wsdl:input>
+        <mime:content part="getLoanDealsByContragentId" type="text/xml" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="getLoanDealsByContragentId" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="LoanDeal">
+    <wsdl:port name="LoanDealHttpsSoap11Endpoint" binding="ns1:LoanDealSoap11Binding">
+      <soap:address location="https://kwsesbapu03.alfa.bank.int:8243/services/LoanDealPT.LoanDealPTHttpsSoap11Endpoint" />
+    </wsdl:port>
+    <wsdl:port name="LoanDealHttpsEndpoint" binding="ns1:LoanDealHttpBinding">
+      <http:address location="https://dwsaspapp01.alfa.bank.int:9443/services/LoanDeal.LoanDealHttpsEndpoint/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

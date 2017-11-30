@@ -1,0 +1,80 @@
+﻿@model List<BusinessLayer.Models.Response.AttachmentResponse>
+
+
+@{
+    Layout = null;
+}
+
+<div class="attachment-wrapper">
+    <div class="panel">
+        <div class="attach-preview"><span class="glyphicon glyphicon-eye-open"  style="right:0px;"/></div>
+    </div>
+
+    <div class="attachment_content">
+        <div id="attachments_table_container">
+            @if (Model != null && Model.Count > 0)
+            {
+                var header = Model.FirstOrDefault()?.AttachmentsAttributes?.Select(x => new { DisplayName = x.DisplayName, DisplayOrder = x.DisplayOrder }).Distinct().OrderBy(y => y.DisplayOrder);
+
+                <table id="attachments_table">
+                    <thead>
+                        <tr>
+                            @foreach (var title in header)
+                            {
+                                <td>@title.DisplayName</td>
+                            }
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var doc in Model)
+                        {
+                            <tr>
+                                <td class="attachment-id">@doc.AttachmentsAttributes.FirstOrDefault(x => x.DisplayOrder == 0).Value</td>
+                                @foreach (var title in header.Where(x => x.DisplayOrder > 0))
+                                {
+                                    <td>@doc.AttachmentsAttributes.FirstOrDefault(x => x.DisplayOrder == title.DisplayOrder).Value</td>
+                                }
+                                <td>
+                                    <span class="glyphicon glyphicon-download download-attachment" />
+                                    <span class="glyphicon glyphicon-remove" />
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+
+        <div class="containerWithPreview" hidden="hidden">
+            <div class="row">
+                <div class='list-group gallery'>
+                                      
+                </div> <!-- list-group / end -->
+            </div> <!-- row / end -->
+        </div> <!-- container / end -->
+    </div>
+</div>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+<script language="javascript">
+    $(document).ready(function () {
+        $("#attachments_table").DataTable({
+            paging: false,
+            searching: false,
+            info: false,
+            columnDefs: [
+                {
+                    targets: [0],
+                    className: "hidden_column"
+                }
+            ]
+        });
+    });
+</script>
+
+
+

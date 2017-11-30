@@ -1,0 +1,1472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://sab/" name="DocumentManagement2" targetNamespace="http://sab/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <documentation>service DocumentManagement2 $Rev: 17618 $</documentation>
+  <types>
+    <xs:schema xmlns:ns1="http://sab/" elementFormDefault="qualified" targetNamespace="http://sab/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="AttributeType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="attribute">
+            <xs:annotation>
+              <xs:documentation>атрибут и его значение. в случае getDocumentTypes значение не используется.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:simpleContent>
+                <xs:extension base="xs:string">
+                  <xs:attribute name="name" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation>имя атрибута</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="isRequired" type="xs:boolean">
+                    <xs:annotation>
+                      <xs:documentation>обязательность атрибута. только для getDocumentTypes</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="identificationGroup" type="xs:string">
+                    <xs:annotation>
+                      <xs:documentation>идентификационные группы. только для getDocumentTypes</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                </xs:extension>
+              </xs:simpleContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="AttributeTypeWithAny">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="attribute">
+            <xs:annotation>
+              <xs:documentation>атрибут и его значение. в случае getDocumentTypes значение не используется.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+              <xs:simpleContent>
+                <xs:extension base="xs:string">
+                  <xs:attribute name="name" type="xs:string" use="required">
+                    <xs:annotation>
+                      <xs:documentation>имя атрибута</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="isRequired" type="xs:boolean">
+                    <xs:annotation>
+                      <xs:documentation>обязательность атрибута. только для getDocumentTypes</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:attribute name="identificationGroup" type="xs:string">
+                    <xs:annotation>
+                      <xs:documentation>идентификационные группы. только для getDocumentTypes</xs:documentation>
+                    </xs:annotation>
+                  </xs:attribute>
+                  <xs:anyAttribute processContents="skip" />
+                </xs:extension>
+              </xs:simpleContent>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="DocumentType">
+        <xs:annotation>
+          <xs:documentation>типа документа</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" ref="ns1:documentType" />
+          <xs:element minOccurs="0" ref="ns1:documentParentType" />
+          <xs:element ref="ns1:documentTypeName" />
+          <xs:element ref="ns1:documentTypePath" />
+          <xs:element ref="ns1:documentTypeObject" />
+          <xs:element minOccurs="0" ref="ns1:changeName" />
+          <xs:element minOccurs="0" ref="ns1:attributes" />
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:documentTypeItem" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="documentType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>тип документа</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="documentParentType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>тип родителя документа</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="documentTypeName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>название типа документа</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="documentTypePath" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>путь по которому будет создаваться документ данного типа</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="documentTypeObject" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>роль типа в справочнике document/folder</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="changeName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>шаблон формирования имени</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="attributes" type="ns1:AttributeTypeWithAny">
+        <xs:annotation>
+          <xs:documentation>атрибуты типа</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="documentTypeItem" type="ns1:DocumentType">
+        <xs:annotation>
+          <xs:documentation>доченрние типы</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="getDocumentTypesRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="documentType" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>тип документа (не обязательный парамерт)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" name="documentTypeName" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>название типа документа (не обязательный парамерт)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" ref="ns1:compareAsLike" />
+            <xs:element minOccurs="0" ref="ns1:favoriteOnly" />
+            <xs:element minOccurs="0" ref="ns1:typeContragentK014" />
+            <xs:element minOccurs="0" ref="ns1:documentTypeOnly" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="compareAsLike" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Не обязательный, по умолчанию - false. Имеет смысл при поиске только по названию типа документа. Если true - в условии запроса будет операция LIKE, поиск по первым указанным символам в documentTypeName. Иначе - операция равно, поиск по полному совпадению с documentTypeName. Так же, если true - атрибуты не возвращаются для уменьшения трафика.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="favoriteOnly" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Не обязательный, по умолчанию - false. Имеет смысл при поиске только по названию типа документа. Если true - возвращает часто используемые типы документов (from EADocumentType where favoriteDocType = 1).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="typeContragentK014" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Не обязательный. id типа контрагента из справочника K014. Типы документов определяются по окончанию typeIdentificator: 3 = FZL, остальные = JRL.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="documentTypeOnly" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Не обязательный, по умолчанию - false. Имеет смысл при поиске только по названию типа документа. Если true - возвращает только типы документов (from EADocumentType), иначе - ответ дополняется типами папок (EAFolderType).</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="getDocumentTypesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="documentTypeItem" type="ns1:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="registerDocumentRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentType" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>типа документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="attributes" type="ns1:AttributeType">
+              <xs:annotation>
+                <xs:documentation>атрибуты документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" ref="ns1:documentBase64" />
+            <xs:element minOccurs="0" ref="ns1:emptyContent" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="documentBase64" type="xs:base64Binary">
+        <xs:annotation>
+          <xs:documentation>содержание документа в Base64</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="emptyContent" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>если true - создаётся документ без вложения. По умолчанию - false</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="registerDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="registerFolderRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:folderType" />
+            <xs:element name="attributes" type="ns1:AttributeType">
+              <xs:annotation>
+                <xs:documentation>атрибуты папки</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="folderType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>типа папки</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="registerFolderResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:folderId" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="folderId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>ид папки</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="getDocumentListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" ref="ns1:documentType" />
+            <xs:element minOccurs="0" name="documentVersion" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>версия документа(current - конкретно найденной, latest или ничего - последняя версия, all - все версии, цифра - количество последних версий)</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" ref="ns1:returnAttrs" />
+            <xs:element minOccurs="0" ref="ns1:skipCheckIdent" />
+            <xs:element minOccurs="0" name="attributes" type="ns1:AttributeType">
+              <xs:annotation>
+                <xs:documentation>атрибуты для поиска</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="returnAttrs" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>необходимость возвращать атрибуты(по-умолчанию false)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="skipCheckIdent" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>пропустить проверку аттрибутов на начилие заполненной атрибутной группы(для documentVersion равным all или цифра проверка по умолчанию не делается)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="getDocumentListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:documentList" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="documentList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:documentItem" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="documentItem">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="documentVersion" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>версия документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element ref="ns1:documentName" />
+            <xs:element name="documentType" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>идентификатор типа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element ref="ns1:documentPath" />
+            <xs:element ref="ns1:isLatestVersion" />
+            <xs:element minOccurs="0" name="attributes" type="ns1:AttributeType">
+              <xs:annotation>
+                <xs:documentation>атрибуты документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="documentName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>название </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="documentPath" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>полный путь к документу </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="isLatestVersion" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>является ли документ последней версией </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="getDocumentRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" ref="ns1:returnLikeAttachment" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="returnLikeAttachment" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>возвращать тело документа в виде аттачмента(http://www.w3.org/Submission/soap11mtom10/), по умолчанию false</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="getDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" ref="ns1:fileName" />
+            <xs:element minOccurs="0" ref="ns1:mimeType" />
+            <xs:element ref="ns1:documentBase64" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="fileName" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>имя файла</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="mimeType" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>тип файла</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="removeDocumentRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="removeDocumentResponse" type="xs:string" />
+      <xs:element name="deleteObjectRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:objectId" />
+            <xs:element minOccurs="0" ref="ns1:allVersions" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="objectId" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>ид объекта</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="allVersions" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>удалять ли все версии. По умолч. - false</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="deleteObjectResponse" type="xs:string" />
+      <xs:element name="setDocumentNumberRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид докумнета</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element ref="ns1:documentNo" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="documentNo" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>номер документа</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="setDocumentNumberResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setDocumentAttributesRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид докумнета</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="attributes" type="ns1:AttributeType">
+              <xs:annotation>
+                <xs:documentation>атрибуты документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" ref="ns1:useCurrentAttrs" />
+            <xs:element minOccurs="0" ref="ns1:doNotUpdateVersion" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="useCurrentAttrs" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>По-умолчанию false. Использовать ли при изменении атрибуты, которые есть у документа на текущий момент. Используется когда передаются не все атрибуты, которые используются в создании имени папки. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="doNotUpdateVersion" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>По-умолчанию false. Создавать ли новую версию при изменении атрибутов. true - без накручивания новой версии.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="setDocumentAttributesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="documentVersion" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getFolderTreeRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" ref="ns1:restriction" />
+            <xs:element minOccurs="0" name="attributes" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Список атрибутов через запятую и с учетом регистра, которые необходимо получить в элементах дерева</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" ref="ns1:role" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="restriction">
+        <xs:annotation>
+          <xs:documentation>Условие выборки по атрибутом для построения дерева. Не обязательный, по умолчанию - получить лес всех деревьев для forObjectType</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:condition" />
+          </xs:sequence>
+          <xs:attribute name="forObjectType" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Указывает на тип объекта (выборка FROM в запросе), например EADocument, или EAFolder. Не обязательный, по умолчанию - EAFolder.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="condition">
+        <xs:annotation>
+          <xs:documentation>условия выборки</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="attribute" type="xs:string" use="required">
+                <xs:annotation>
+                  <xs:documentation>Атрибут в условии выборки. Обязательный. Пример - contragentT24ID</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+              <xs:attribute name="type" type="xs:string">
+                <xs:annotation>
+                  <xs:documentation>Тип атрибута - string, date, boolean. Не обязательный, по умолчанию - string.</xs:documentation>
+                </xs:annotation>
+              </xs:attribute>
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="role" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Роль. Правила доступа к документам и папкам определяются из конфига</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="getFolderTreeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:folderTree" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="folderTree">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:node" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="node">
+        <xs:annotation>
+          <xs:documentation>элемент дерева</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:simpleContent>
+            <xs:extension base="xs:string">
+              <xs:attribute name="objectId" type="xs:string" use="required" />
+              <xs:attribute name="parentId" type="xs:string" use="required" />
+              <xs:anyAttribute processContents="skip" />
+            </xs:extension>
+          </xs:simpleContent>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="findDocumentsRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" ref="ns1:criteria" />
+            <xs:element minOccurs="0" ref="ns1:projection" />
+            <xs:element minOccurs="0" ref="ns1:searchAllVersions" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="criteria">
+        <xs:annotation>
+          <xs:documentation>критерии в WHERE запроса. При отсутствии - нет WHERE в запросе</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="attribute">
+              <xs:complexType>
+                <xs:simpleContent>
+                  <xs:extension base="xs:string">
+                    <xs:attribute name="name" type="xs:string" use="required">
+                      <xs:annotation>
+                        <xs:documentation>обязательный</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="compareBy">
+                      <xs:annotation>
+                        <xs:documentation>не обязательный, по умолчанию equals</xs:documentation>
+                      </xs:annotation>
+                      <xs:simpleType>
+                        <xs:restriction base="xs:token">
+                          <xs:enumeration value="equals" />
+                          <xs:enumeration value="notEquals" />
+                          <xs:enumeration value="like" />
+                          <xs:enumeration value="notLike" />
+                          <xs:enumeration value="in" />
+                          <xs:enumeration value="notIn" />
+                          <xs:enumeration value="isNull" />
+                          <xs:enumeration value="isNotNull" />
+                          <xs:enumeration value="less" />
+                          <xs:enumeration value="great" />
+                          <xs:enumeration value="lessOrEq" />
+                          <xs:enumeration value="greatOrEq" />
+                        </xs:restriction>
+                      </xs:simpleType>
+                    </xs:attribute>
+                    <xs:attribute name="type" type="xs:string">
+                      <xs:annotation>
+                        <xs:documentation>не обязательный, по умолчанию string</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                    <xs:attribute name="value" type="xs:string">
+                      <xs:annotation>
+                        <xs:documentation>не обязательный</xs:documentation>
+                      </xs:annotation>
+                    </xs:attribute>
+                  </xs:extension>
+                </xs:simpleContent>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="projection">
+        <xs:annotation>
+          <xs:documentation>список в SELECT запроса. При отсутствии - выбрать всё в запросе</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="attribute">
+              <xs:complexType>
+                <xs:attribute name="name" type="xs:string" use="required" />
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="searchAllVersions" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Если true - вернёт все версии найденных документов. Не обязательный, по умолчанию - false.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="findDocumentsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:documents" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="documents">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:document" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="document">
+        <xs:complexType>
+          <xs:anyAttribute processContents="skip" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="findDealsRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" ref="ns1:criteria" />
+            <xs:element minOccurs="0" ref="ns1:projection" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="findDealsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:deals" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deals">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:deal" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deal">
+        <xs:complexType>
+          <xs:anyAttribute processContents="skip" />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDocumentOriginalLocationsRequest">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="getDocumentOriginalLocationsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:location" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="location">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:code" />
+            <xs:element ref="ns1:text" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="code" type="xs:string" />
+      <xs:element name="text" type="xs:string" />
+      <xs:element name="getIssueReasonsRequest">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="getIssueReasonsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:reason" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="reason">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:code" />
+            <xs:element ref="ns1:text" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getIssueFormsRequest">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="getIssueFormsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:form" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="form">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:code" />
+            <xs:element ref="ns1:text" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getProvideDocumentFormRequest">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="getProvideDocumentFormResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:form" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getMistakeListRequest">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="getMistakeListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:mistake" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="mistake">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:code" />
+            <xs:element ref="ns1:text" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getIssueStatusRequest">
+        <xs:complexType />
+      </xs:element>
+      <xs:element name="getIssueStatusResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="status">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="ns1:code" />
+                  <xs:element ref="ns1:text" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEAMappingProductsAndDocumentsRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="productType" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Тип банковского продукта. Обязательный</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="productSubType" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Подтип банковского продукта. Обязательный</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEAMappingProductsAndDocumentsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:products" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="products">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:product" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="product">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="productType" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Тип банковского продукта</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="productSubType" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>Подтип банковского продукта</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element ref="ns1:typeIdentificator" />
+            <xs:element ref="ns1:documentTitleCustom" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="typeIdentificator" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Идентификатор типа</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="documentTitleCustom" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Заголовок документа custom</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="findDocumentsTemplateRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:templateDocIdentificator" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="templateDocIdentificator" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>тип документа. Обязательный</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="findDocumentsTemplateResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="massExtractionPreProcessRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:file" />
+            <xs:element minOccurs="0" ref="ns1:filename" />
+            <xs:element minOccurs="0" ref="ns1:email" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="file" type="xs:base64Binary">
+        <xs:annotation>
+          <xs:documentation>EXCEL файл в Base64</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="filename" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>Имя файла, не обязательный</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="email" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>email для оповещения окончания обработки, не обязательный</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="massExtractionPreProcessResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид документа с исходным EXCEL</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="massExtractionPostProcessRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:file" />
+            <xs:element name="attributes" type="ns1:AttributeType">
+              <xs:annotation>
+                <xs:documentation>атрибуты документа для обновления</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" ref="ns1:filename" />
+            <xs:element minOccurs="0" ref="ns1:email" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="massExtractionPostProcessResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид документа с исходным EXCEL</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="registerDocumentDossierRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentType" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>типа документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="attributes" type="ns1:AttributeType">
+              <xs:annotation>
+                <xs:documentation>атрибуты документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" ref="ns1:documentBase64" />
+            <xs:element minOccurs="0" ref="ns1:emptyContent" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="registerDocumentDossierResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="documentId" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>ид документа</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setDocumentAttributesBulkRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element ref="ns1:documentIds" />
+            <xs:element name="attributes" type="ns1:AttributeType">
+              <xs:annotation>
+                <xs:documentation>атрибуты документов</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element minOccurs="0" ref="ns1:useCurrentAttrs" />
+            <xs:element minOccurs="0" ref="ns1:doNotUpdateVersion" />
+            <xs:element minOccurs="0" ref="ns1:emailAdmin" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="documentIds" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>ид докумнетов, через запятую</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="emailAdmin" type="xs:string">
+        <xs:annotation>
+          <xs:documentation>email администратора для оповещения ошибок обработки, не обязательный</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="setDocumentAttributesBulkResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="status" type="xs:string">
+              <xs:annotation>
+                <xs:documentation>информация о запуске фонового процесса обработки</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <message name="getEAMappingProductsAndDocumentsInput">
+    <part name="body" element="tns:getEAMappingProductsAndDocumentsRequest" />
+  </message>
+  <message name="findDealsInput">
+    <part name="body" element="tns:findDealsRequest" />
+  </message>
+  <message name="getDocumentTypesOutput">
+    <part name="body" element="tns:getDocumentTypesResponse" />
+  </message>
+  <message name="getMistakeListOutput">
+    <part name="body" element="tns:getMistakeListResponse" />
+  </message>
+  <message name="massExtractionPostProcessOutput">
+    <part name="body" element="tns:massExtractionPostProcessResponse" />
+  </message>
+  <message name="getFolderTreeOutput">
+    <part name="body" element="tns:getFolderTreeResponse" />
+  </message>
+  <message name="findDealsOutput">
+    <part name="body" element="tns:findDealsResponse" />
+  </message>
+  <message name="getDocumentListInput">
+    <part name="body" element="tns:getDocumentListRequest" />
+  </message>
+  <message name="getIssueStatusOutput">
+    <part name="body" element="tns:getIssueStatusResponse" />
+  </message>
+  <message name="registerDocumentDossierOutput">
+    <part name="body" element="tns:registerDocumentDossierResponse" />
+  </message>
+  <message name="findDocumentsInput">
+    <part name="body" element="tns:findDocumentsRequest" />
+  </message>
+  <message name="removeDocumentInput">
+    <part name="body" element="tns:removeDocumentRequest" />
+  </message>
+  <message name="setDocumentAttributesOutput">
+    <part name="body" element="tns:setDocumentAttributesResponse" />
+  </message>
+  <message name="findDocumentsTemplateInput">
+    <part name="body" element="tns:findDocumentsTemplateRequest" />
+  </message>
+  <message name="getIssueReasonsInput">
+    <part name="body" element="tns:getIssueReasonsRequest" />
+  </message>
+  <message name="massExtractionPreProcessInput">
+    <part name="body" element="tns:massExtractionPreProcessRequest" />
+  </message>
+  <message name="getDocumentOriginalLocationsOutput">
+    <part name="body" element="tns:getDocumentOriginalLocationsResponse" />
+  </message>
+  <message name="getDocumentTypesInput">
+    <part name="body" element="tns:getDocumentTypesRequest" />
+  </message>
+  <message name="setDocumentAttributesInput">
+    <part name="body" element="tns:setDocumentAttributesRequest" />
+  </message>
+  <message name="registerFolderInput">
+    <part name="body" element="tns:registerFolderRequest" />
+  </message>
+  <message name="massExtractionPreProcessOutput">
+    <part name="body" element="tns:massExtractionPreProcessResponse" />
+  </message>
+  <message name="getIssueStatusInput">
+    <part name="body" element="tns:getIssueStatusRequest" />
+  </message>
+  <message name="getIssueReasonsOutput">
+    <part name="body" element="tns:getIssueReasonsResponse" />
+  </message>
+  <message name="getMistakeListInput">
+    <part name="body" element="tns:getMistakeListRequest" />
+  </message>
+  <message name="findDocumentsOutput">
+    <part name="body" element="tns:findDocumentsResponse" />
+  </message>
+  <message name="getDocumentOutput">
+    <part name="body" element="tns:getDocumentResponse" />
+  </message>
+  <message name="deleteObjectInput">
+    <part name="body" element="tns:deleteObjectRequest" />
+  </message>
+  <message name="getDocumentInput">
+    <part name="body" element="tns:getDocumentRequest" />
+  </message>
+  <message name="removeDocumentOutput">
+    <part name="body" element="tns:removeDocumentResponse" />
+  </message>
+  <message name="registerFolderOutput">
+    <part name="body" element="tns:registerFolderResponse" />
+  </message>
+  <message name="getIssueFormsInput">
+    <part name="body" element="tns:getIssueFormsRequest" />
+  </message>
+  <message name="massExtractionPostProcessInput">
+    <part name="body" element="tns:massExtractionPostProcessRequest" />
+  </message>
+  <message name="getProvideDocumentFormInput">
+    <part name="body" element="tns:getProvideDocumentFormRequest" />
+  </message>
+  <message name="registerDocumentInput">
+    <part name="body" element="tns:registerDocumentRequest" />
+  </message>
+  <message name="getProvideDocumentFormOutput">
+    <part name="body" element="tns:getProvideDocumentFormResponse" />
+  </message>
+  <message name="deleteObjectOutput">
+    <part name="body" element="tns:deleteObjectResponse" />
+  </message>
+  <message name="setDocumentNumberOutput">
+    <part name="body" element="tns:setDocumentNumberResponse" />
+  </message>
+  <message name="getIssueFormsOutput">
+    <part name="body" element="tns:getIssueFormsResponse" />
+  </message>
+  <message name="registerDocumentDossierInput">
+    <part name="body" element="tns:registerDocumentDossierRequest" />
+  </message>
+  <message name="registerDocumentOutput">
+    <part name="body" element="tns:registerDocumentResponse" />
+  </message>
+  <message name="setDocumentAttributesBulkInput">
+    <part name="body" element="tns:setDocumentAttributesBulkRequest" />
+  </message>
+  <message name="getFolderTreeInput">
+    <part name="body" element="tns:getFolderTreeRequest" />
+  </message>
+  <message name="setDocumentNumberInput">
+    <part name="body" element="tns:setDocumentNumberRequest" />
+  </message>
+  <message name="getDocumentListOutput">
+    <part name="body" element="tns:getDocumentListResponse" />
+  </message>
+  <message name="findDocumentsTemplateOutput">
+    <part name="body" element="tns:findDocumentsTemplateResponse" />
+  </message>
+  <message name="getEAMappingProductsAndDocumentsOutput">
+    <part name="body" element="tns:getEAMappingProductsAndDocumentsResponse" />
+  </message>
+  <message name="setDocumentAttributesBulkOutput">
+    <part name="body" element="tns:setDocumentAttributesBulkResponse" />
+  </message>
+  <message name="getDocumentOriginalLocationsInput">
+    <part name="body" element="tns:getDocumentOriginalLocationsRequest" />
+  </message>
+  <portType name="DocumentManagement2Port">
+    <operation name="getDocumentTypes">
+      <documentation>Получение  информации о типах документов и папок из справочника документооборота. Справочник имеет древовидную структуру: существуют папки и документы. Папки - виртуальный объект, который содержит в себе другие папки и документы. Документ - конечный элемент, эквивалент реального документа. Если идет поиск папки, то возвращается и список документов, которые содержит данная папка.  Если в поиск ничего не передать, то будут возвращены корневые папки справочника.</documentation>
+      <input message="tns:getDocumentTypesInput" />
+      <output message="tns:getDocumentTypesOutput" />
+    </operation>
+    <operation name="registerDocument">
+      <documentation>регистрирование документа(создание или обновление)</documentation>
+      <input message="tns:registerDocumentInput" />
+      <output message="tns:registerDocumentOutput" />
+    </operation>
+    <operation name="registerFolder">
+      <documentation>регистрирование папки без документов(создание или обновление иерархии пустых папок)</documentation>
+      <input message="tns:registerFolderInput" />
+      <output message="tns:registerFolderOutput" />
+    </operation>
+    <operation name="getDocumentList">
+      <documentation>Получение списка документов по типу и атрибутам</documentation>
+      <input message="tns:getDocumentListInput" />
+      <output message="tns:getDocumentListOutput" />
+    </operation>
+    <operation name="getDocument">
+      <documentation>получение документа по ид</documentation>
+      <input message="tns:getDocumentInput" />
+      <output message="tns:getDocumentOutput" />
+    </operation>
+    <operation name="removeDocument">
+      <documentation>удаление документа (скрытие)</documentation>
+      <input message="tns:removeDocumentInput" />
+      <output message="tns:removeDocumentOutput" />
+    </operation>
+    <operation name="deleteObject">
+      <documentation>удаление документа или папки (физическое)</documentation>
+      <input message="tns:deleteObjectInput" />
+      <output message="tns:deleteObjectOutput" />
+    </operation>
+    <operation name="setDocumentNumber">
+      <documentation>Изменение номера документа.Deprecated. Вместо использовать метод setDocumentAttributes передавая attribute name='docNumber'.</documentation>
+      <input message="tns:setDocumentNumberInput" />
+      <output message="tns:setDocumentNumberOutput" />
+    </operation>
+    <operation name="setDocumentAttributes">
+      <documentation>изменение атрибутов документа</documentation>
+      <input message="tns:setDocumentAttributesInput" />
+      <output message="tns:setDocumentAttributesOutput" />
+    </operation>
+    <operation name="getFolderTree">
+      <documentation>Получение дерева папок и документов</documentation>
+      <input message="tns:getFolderTreeInput" />
+      <output message="tns:getFolderTreeOutput" />
+    </operation>
+    <operation name="findDocuments">
+      <documentation>Поиск документов по произвольным критериям. Возвращает настраиваемый набор свойств найденных документов</documentation>
+      <input message="tns:findDocumentsInput" />
+      <output message="tns:findDocumentsOutput" />
+    </operation>
+    <operation name="findDeals">
+      <documentation>Поиск сделок по произвольным критериям. Возвращает настраиваемый набор свойств найденных сделок</documentation>
+      <input message="tns:findDealsInput" />
+      <output message="tns:findDealsOutput" />
+    </operation>
+    <operation name="getDocumentOriginalLocations">
+      <documentation>Справочник FileNet Месторасположение документа</documentation>
+      <input message="tns:getDocumentOriginalLocationsInput" />
+      <output message="tns:getDocumentOriginalLocationsOutput" />
+    </operation>
+    <operation name="getIssueReasons">
+      <documentation>Справочник FileNet Причин выдачи документов</documentation>
+      <input message="tns:getIssueReasonsInput" />
+      <output message="tns:getIssueReasonsOutput" />
+    </operation>
+    <operation name="getIssueForms">
+      <documentation>Справочник FileNet Форм документа для выемки</documentation>
+      <input message="tns:getIssueFormsInput" />
+      <output message="tns:getIssueFormsOutput" />
+    </operation>
+    <operation name="getProvideDocumentForm">
+      <documentation>Справочник FileNet форм предоставления документа</documentation>
+      <input message="tns:getProvideDocumentFormInput" />
+      <output message="tns:getProvideDocumentFormOutput" />
+    </operation>
+    <operation name="getMistakeList">
+      <documentation>Справочник FileNet типов ошибок</documentation>
+      <input message="tns:getMistakeListInput" />
+      <output message="tns:getMistakeListOutput" />
+    </operation>
+    <operation name="getIssueStatus">
+      <documentation>Справочник FileNet статусов выемки</documentation>
+      <input message="tns:getIssueStatusInput" />
+      <output message="tns:getIssueStatusOutput" />
+    </operation>
+    <operation name="getEAMappingProductsAndDocuments">
+      <documentation>Справочник FileNet EAMappingProductsAndDocuments</documentation>
+      <input message="tns:getEAMappingProductsAndDocumentsInput" />
+      <output message="tns:getEAMappingProductsAndDocumentsOutput" />
+    </operation>
+    <operation name="findDocumentsTemplate">
+      <documentation>Возвращает id документа по заданному templateDocIdentificator</documentation>
+      <input message="tns:findDocumentsTemplateInput" />
+      <output message="tns:findDocumentsTemplateOutput" />
+    </operation>
+    <operation name="massExtractionPreProcess">
+      <documentation>Принимает EXCEL файл в Base64 со сделками, дополняет его атрибутами сделок и возвращает ид документа, в последней версии которого будет измененный EXCEL файл</documentation>
+      <input message="tns:massExtractionPreProcessInput" />
+      <output message="tns:massExtractionPreProcessOutput" />
+    </operation>
+    <operation name="massExtractionPostProcess">
+      <documentation>Проведение массовой выемки в системе. Принимает EXCEL файл в Base64 со сделками, выполняет обновление атрибутов документов для сделок из файла.</documentation>
+      <input message="tns:massExtractionPostProcessInput" />
+      <output message="tns:massExtractionPostProcessOutput" />
+    </operation>
+    <operation name="registerDocumentDossier">
+      <documentation>регистрирование документа с предзаполнением обязательных атрибутов</documentation>
+      <input message="tns:registerDocumentDossierInput" />
+      <output message="tns:registerDocumentDossierOutput" />
+    </operation>
+    <operation name="setDocumentAttributesBulk">
+      <documentation>изменение атрибутов множества документов</documentation>
+      <input message="tns:setDocumentAttributesBulkInput" />
+      <output message="tns:setDocumentAttributesBulkOutput" />
+    </operation>
+  </portType>
+  <binding name="DocumentManagement2PortSoapBinding" type="tns:DocumentManagement2Port">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="getDocumentTypes">
+      <soap:operation soapAction="urn:getDocumentTypes" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="registerDocument">
+      <soap:operation soapAction="urn:registerDocument" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="registerFolder">
+      <soap:operation soapAction="urn:registerFolder" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getDocumentList">
+      <soap:operation soapAction="urn:getDocumentList" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getDocument">
+      <soap:operation soapAction="urn:getDocument" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="removeDocument">
+      <soap:operation soapAction="urn:removeDocument" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="deleteObject">
+      <soap:operation soapAction="urn:deleteObject" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="setDocumentNumber">
+      <soap:operation soapAction="urn:setDocumentNumber" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="setDocumentAttributes">
+      <soap:operation soapAction="urn:setDocumentAttributes" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getFolderTree">
+      <soap:operation soapAction="urn:getFolderTree" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="findDocuments">
+      <soap:operation soapAction="urn:findDocuments" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="findDeals">
+      <soap:operation soapAction="urn:findDeals" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getDocumentOriginalLocations">
+      <soap:operation soapAction="urn:getDocumentOriginalLocations" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getIssueReasons">
+      <soap:operation soapAction="urn:getIssueReasons" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getIssueForms">
+      <soap:operation soapAction="urn:getIssueForms" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getProvideDocumentForm">
+      <soap:operation soapAction="urn:getProvideDocumentForm" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getMistakeList">
+      <soap:operation soapAction="urn:getMistakeList" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getIssueStatus">
+      <soap:operation soapAction="urn:getIssueStatus" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="getEAMappingProductsAndDocuments">
+      <soap:operation soapAction="urn:getEAMappingProductsAndDocuments" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="findDocumentsTemplate">
+      <soap:operation soapAction="urn:findDocumentsTemplate" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="massExtractionPreProcess">
+      <soap:operation soapAction="urn:massExtractionPreProcess" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="massExtractionPostProcess">
+      <soap:operation soapAction="urn:massExtractionPostProcess" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="registerDocumentDossier">
+      <soap:operation soapAction="urn:registerDocumentDossier" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="setDocumentAttributesBulk">
+      <soap:operation soapAction="urn:setDocumentAttributesBulk" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="DocumentManagement2">
+    <port name="DocumentManagement2Port" binding="tns:DocumentManagement2PortSoapBinding">
+      <soap:address location="https://172.17.241.135:9445/services/DocumentManagement2/" />
+    </port>
+  </service>
+</definitions>

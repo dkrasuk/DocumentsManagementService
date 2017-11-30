@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DataAccessLayer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DataAccessLayer_ContragentSoapService_Contragent" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://kwsesbapu03.alfa.bank.int:8243/services/Contragent.ContragentHttpsSoap11Endpoint/</Value>
+    </Setting>
+    <Setting Name="DataAccessLayer_LoanDealSoapWebService_LoanDeal" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://kwsesbapu03.alfa.bank.int:8243/services/LoanDealPT.LoanDealPTHttpsSoap11Endpoint/</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

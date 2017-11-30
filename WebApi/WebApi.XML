@@ -1,0 +1,196 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApi</name>
+    </assembly>
+    <members>
+        <member name="T:WebApi.Controllers.DocumentManagementApiController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementApiController.#ctor(BusinessLayer.Interfaces.IDictionaryService,BusinessLayer.Interfaces.IDocumentManagementService,BusinessLayer.Interfaces.IAccountService)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+            <param name="dmService"></param>
+            <param name="accountService"></param>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementApiController.GetDocumentType(System.String)">
+            <summary>
+            GetDocumentType action returns info for selected document
+            </summary>
+            <param name="documentTypeName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementApiController.GetDocumentType">
+            <summary>
+            GetDocumentType action returns list of supported documents
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementApiController.GetRequiredAttributes(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="documentType"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementApiController.GetAttachments(System.Collections.Generic.List{BusinessLayer.Models.AdditionalParametersRequest})">
+            <summary>
+            
+            </summary>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementApiController.GetUserPermissions(BusinessLayer.Models.Request.PermissionsRequest)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementApiController.DeleteDocument(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="documentid"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebApi.Controllers.DocumentManagementController">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementController.#ctor(BusinessLayer.Interfaces.IDocumentManagementService)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementController.GetForm">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementController.GetUiScript">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementController.Post(System.Collections.Generic.List{BusinessLayer.Models.AdditionalParametersRequest})">
+            <summary>
+            
+            </summary>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementController.DownloadAttachment(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementController.GetAttachments(System.Collections.Generic.List{BusinessLayer.Models.AdditionalParametersRequest})">
+            <summary>
+            
+            </summary>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApi.Controllers.DocumentManagementController.GetAttachmentList(System.Collections.Generic.List{BusinessLayer.Models.AdditionalParametersRequest})">
+            <summary>
+            
+            </summary>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="T:WebApi.Filters.AllowCrossSiteAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WebApi.Filters.AllowCrossSiteAttribute.OnActionExecuting(System.Web.Mvc.ActionExecutingContext)">
+            <summary>
+            
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+        <member name="T:WebApi.Filters.AuthenticationFilter">
+            <summary>
+            Authentication Filter
+            </summary>
+        </member>
+        <member name="M:WebApi.Filters.AuthenticationFilter.#ctor">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WebApi.Filters.AuthenticationFilter.OnAuthorization(System.Web.Mvc.AuthorizationContext)">
+            <summary>
+            
+            </summary>
+            <param name="filterContext"></param>
+        </member>
+        <member name="M:WebApi.Filters.AuthenticationFilter.IsAuthenticate(System.Web.Mvc.AuthorizationContext)">
+            <summary>
+            Determines whether the specified filter context is authenticate.
+            </summary>
+            <param name="filterContext">The filter context.</param>
+            <returns>
+              <c>true</c> if the specified filter context is authenticate; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:WebApi.Filters.PermissionsAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WebApi.Filters.PermissionsAttribute.#ctor(BusinessLayer.Models.Permissions)">
+            <summary>
+            
+            </summary>
+            <param name="required"></param>
+        </member>
+        <member name="M:WebApi.Filters.PermissionsAttribute.OnActionExecuting(System.Web.Mvc.ActionExecutingContext)">
+            <summary>
+            
+            </summary>
+            <param name="actionContext"></param>
+        </member>
+        <member name="T:WebApi.MvcApplication">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WebApi.MvcApplication.Application_Start">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:WebApi.MvcApplication.Application_AuthenticateRequest(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="T:WebApi.Providers.CorsPolicyProvider">
+            <summary>
+            Custom ocrs policy provider
+            </summary>
+        </member>
+        <member name="M:WebApi.Providers.CorsPolicyProvider.GetCorsPolicyAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            
+            </summary>
+            <param name="request"></param>
+            <param name="cancellationToken"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

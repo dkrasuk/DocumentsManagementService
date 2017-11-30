@@ -1,0 +1,226 @@
+﻿{
+  "Id": "",
+  "Name": "DM.DocumentType",
+  "Version": "2",
+  "Metadata": null,
+  "Items": [
+    {
+      "Value": {
+        "Id": "fotografiiZalogovoyNedvizhimostiDokumentyiPoObespecheniyuKreditFZL",
+        "Name": "Фото залога",
+        "AllowedFileMaxSize": 4,
+        "AllowedMimeTypes": [
+          "image/jpeg",
+          "image/jpg",
+          "image/png"
+        ],
+        "DataSourceObjects": [
+          {
+            "Name": "LoanDealService",
+            "RequiredParameters": [
+              {
+                "InputParameterName": "DealNo",
+                "PropertyName": "DealNo"
+              }
+            ]
+          },
+          {
+            "Name": "ContragentService",
+            "RequiredParameters": [
+              {
+                "InputParameterName": "ContragentId",
+                "PropertyName": "ContragentId"
+              }
+            ]
+          }
+        ],
+        "Attributes": [
+          {
+            "AttributeName": "contractStartDate",
+            "DataSourceObjectName": "LoanDealService",
+            "DataSourceProperty": "ContractStartDate",
+            "Type": "datetime",
+            "Format": "yyyy-MM-dd"
+          },
+          {
+            "AttributeName": "productType",
+            "DataSourceObjectName": "LoanDealService",
+            "DataSourceProperty": "ProductType"
+          },
+          {
+            "AttributeName": "productSubType",
+            "DataSourceObjectName": "LoanDealService",
+            "DataSourceProperty": "ProductSubType"
+          },
+          {
+            "AttributeName": "contractCurrency",
+            "DataSourceObjectName": "LoanDealService",
+            "DataSourceProperty": "ContractCurrency"
+          },
+          {
+            "AttributeName": "contractID",
+            "DataSourceObjectName": "LoanDealService",
+            "DataSourceProperty": "ContractID"
+          },
+          {
+            "AttributeName": "dealNo",
+            "DataSourceObjectName": "LoanDealService",
+            "DataSourceProperty": "DealNo",
+            "IdentificationGroup": "fl7ProstiePoSdelkeBezSchetaFZL"
+          },
+          {
+            "AttributeName": "applicationDate",
+            "DataSourceObjectName": "LoanDealService",
+            "DataSourceProperty": "ApplicationDate",
+            "Type": "datetime",
+            "Format": "yyyy-MM-dd"
+          },
+          {
+            "AttributeName": "contractBranchOffice",
+            "DataSourceObjectName": "static",
+            "DataSourceProperty": "ContractBranchOffice",
+            "DataSourceValue": "Головний офіс"
+          },
+          {
+            "AttributeName": "creatorB2ID",
+            "DataSourceObjectName": "static",
+            "DataSourceProperty": "CreatorB2ID",
+            "DataSourceValue": "creator"
+          },
+          {
+            "AttributeName": "contractDate",
+            "DataSourceObjectName": "LoanDealService",
+            "DataSourceProperty": "ContractDate",
+            "Type": "datetime",
+            "Format": "yyyy-MM-dd"
+          },
+          {
+            "AttributeName": "contragentT24ID",
+            "DataSourceObjectName": "LoanDealService",
+            "DataSourceProperty": "ContragentId",
+            "IdentificationGroup": "fl7ProstiePoSdelkeBezSchetaFZL"
+          },
+          {
+            "AttributeName": "fullName",
+            "DataSourceObjectName": "ContragentService",
+            "DataSourceProperty": "FullName"
+          },
+          {
+            "AttributeName": "shortName",
+            "DataSourceObjectName": "ContragentService",
+            "DataSourceProperty": "ShortName"
+          },
+          {
+            "AttributeName": "contragentID",
+            "DataSourceObjectName": "ContragentService",
+            "DataSourceProperty": "ContragentID"
+          },
+          {
+            "AttributeName": "contractorSetDate",
+            "DataSourceObjectName": "ContragentService",
+            "DataSourceProperty": "ContractorSetDate",
+            "Type": "datetime",
+            "Format": "yyyy-MM-dd"
+          },
+          {
+            "AttributeName": "contragentTaxCode",
+            "DataSourceObjectName": "ContragentService",
+            "DataSourceProperty": "ContragentTaxCode"
+          },
+          {
+            "AttributeName": "tobo",
+            "DataSourceObjectName": "ContragentService",
+            "DataSourceProperty": "Tobo"
+          },
+          {
+            "AttributeName": "branchCreatorDoc",
+            "DataSourceObjectName": "static",
+            "DataSourceValue": "1"
+          },
+          {
+            "AttributeName": "systemID",
+            "DataSourceObjectName": "static",
+            "DataSourceValue": "alfacollection"
+          },
+          {
+            "AttributeName": "recieveBankDate",
+            "DataSourceObjectName": "additionalParameters",
+            "DataSourceProperty": "RecieveBankDate",
+            "Type": "datetime",
+            "Format": "yyyy-MM-dd"
+          },
+          {
+            "AttributeName": "creatorDocLogin",
+            "DataSourceObjectName": "additionalParameters",
+            "DataSourceProperty": "CreatorDocLogin"
+          },
+          {
+            "AttributeName": "lastActualizationDate",
+            "DataSourceObjectName": "additionalParameters",
+            "DataSourceProperty": "LastActualizationDate",
+            "Type": "datetime",
+            "Format": "yyyy-MM-dd"
+          },
+          {
+            "AttributeName": "fileName",
+            "DataSourceObjectName": "additionalParameters",
+            "DataSourceProperty": "FileName"
+          },
+          {
+            "AttributeName": "collateralAgreementID",
+            "DataSourceObjectName": "additionalParameters",
+            "DataSourceProperty": "CollateralAgreementId"
+          },
+          {
+            "AttributeName": "pledgeAgreementID",
+            "DataSourceObjectName": "additionalParameters",
+            "DataSourceProperty": "CollateralId"
+          }
+        ],
+        "SearchAttributes": [
+          {
+            "AttributeName": "collateralAgreementID",
+            "DataSourceObjectName": "additionalParameters",
+            "DataSourceProperty": "CollateralAgreementId"
+          },
+          {
+            "AttributeName": "pledgeAgreementID",
+            "DataSourceObjectName": "additionalParameters",
+            "DataSourceProperty": "CollateralId"
+          },
+          {
+            "AttributeName": "typeIdentificator",
+            "DataSourceProperty": "documentType",
+            "DataSourceObjectName": "additionalParameters",
+            "DataSourceValue": "fotografiiZalogovoyNedvizhimostiDokumentyiPoObespecheniyuKreditFZL"
+          }
+        ],
+        "DisplayParameters": [
+          {
+            "DisplayName": "Идентификатор документа",
+            "AttributeName": "objectId",
+            "DisplayOrder": 0
+          },
+          {
+            "DisplayName": "Название файла",
+            "AttributeName": "fileName",
+            "DisplayOrder": 1
+          },
+          {
+            "DisplayName": "Кем добавлен",
+            "AttributeName": "creatorDocLogin",
+            "DisplayOrder": 2
+          },
+          {
+            "DisplayName": "Когда добавлен",
+            "AttributeName": "objectCreateDateTime",
+            "DisplayOrder": 3,
+            "Type": "datetime",
+            "Format": "yyyy-MM-ddTHH:mm:ss"
+          }
+        ]
+      }
+      
+    }
+  ]
+}
